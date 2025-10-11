@@ -3,7 +3,7 @@
 
 **What?** Semantic HTML structure uses HTML5 elements that provide meaning and context to content rather than just presentation.
 
-**Why?** Semantic elements improve accessibility for screen readers, enhance SEO by helping search engines understand content hierarchy, and make code more maintainable and readable for developers.
+**Why?** The purpose is to create accessible web content that assistive technologies can navigate properly. It ensures search engines understand the content structure for better rankings and makes the code maintainable for future development.
 
 **How?** The implementation uses proper HTML5 semantic elements throughout the document structure:
 
@@ -28,7 +28,7 @@
 
 **What?** A single-page layout contains all CV content within one HTML document organized into distinct sections without requiring navigation between pages.
 
-**Why?** This design provides immediate access to all information, improves user experience by eliminating page loads, and creates a cohesive presentation suitable for both digital viewing and printing.
+**Why?** The purpose is to provide instant access to all CV information without requiring navigation between pages. This creates a seamless user experience and ensures the content works equally well for digital viewing and printing.
 
 **How?** The layout implements three main content sections within a structured HTML document:
 
@@ -50,7 +50,7 @@
 
 **What?** SEO meta tags are HTML elements in the head section that provide structured information about the webpage to search engines and browsers.
 
-**Why?** These tags improve search engine rankings by helping crawlers understand page content, display attractive snippets in search results, and categorize the website properly. They enhance discoverability and click-through rates from search engine results pages.
+**Why?** The purpose is to help search engines understand and properly index the webpage content for better visibility. These tags control how the page appears in search results to attract more visitors.
 
 **How?** The implementation uses four essential meta tags within the HTML head section:
 
@@ -65,7 +65,7 @@
 
 **What?** Open Graph (OG) tags are meta tags that control how content appears when shared on social media platforms like Facebook, LinkedIn, and Twitter.
 
-**Why?** These tags ensure consistent, attractive presentation when the webpage is shared, displaying custom titles, descriptions, and images instead of default auto-generated content. They significantly improve click-through rates and professional appearance on social platforms.
+**Why?** The purpose is to control how the webpage appears when shared on social media platforms with custom titles and descriptions. This ensures professional presentation and increases the likelihood of engagement when shared.
 
 **How?** The implementation includes essential OG properties and Twitter Card tags in the head section:
 
@@ -81,7 +81,7 @@
 
 **What?** A favicon is a small icon displayed in browser tabs, bookmarks, and browser interfaces to visually identify the website.
 
-**Why?** Favicons enhance brand recognition, improve user experience by making the site easily identifiable among multiple tabs, and provide professional appearance. They also appear in bookmarks and browser history for better visual navigation.
+**Why?** The purpose is to provide visual identification of the website in browser tabs, bookmarks, and browser interfaces. This creates a professional appearance and helps users quickly locate the site among multiple open tabs.
 
 **How?** Multiple favicon formats are implemented to ensure compatibility across different devices and browsers:
 
