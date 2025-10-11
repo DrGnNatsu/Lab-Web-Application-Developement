@@ -35,24 +35,17 @@ The structure uses header/main/footer for layout, section/article for content or
 **How?** The layout implements three main content sections within a structured HTML document:
 
 ```html
-<main>
-    <section id="education">
-        <h2>Education</h2>
-        <article>
-            <h3>School Name, Location - Degree</h3>
-        </article>
-    </section>
-    <section id="skills">
-        <h2>Skills</h2>
-        <p>HTML, CSS, JavaScript, Accessibility...</p>
-    </section>
-    <section id="experience">
-        <h2>Experience</h2>
-        <article>
-            <h3>Company Name, Location - Job Title</h3>
-        </article>
-    </section>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<style>
+</style>
+<body>
+
+</body>
+</html>
 ```
 
 Each section uses semantic elements and consistent styling to create a professional, scannable CV format.
