@@ -1,64 +1,111 @@
 # Submission Checklist:
 ## Semantically correct HTML structure.
 
-The HTML document demonstrates proper semantic structure using HTML5 semantic elements:
+**What?** Semantic HTML structure uses HTML5 elements that provide meaning and context to content rather than just presentation.
 
-**Document Structure:**
-- `<!DOCTYPE html>` declaration with proper `<html lang="en">` attribute
-- Well-organized `<head>` section with comprehensive meta tags
-- Semantic body layout using `<header>`, `<main>`, and `<footer>` elements
+**Why?** Semantic elements improve accessibility for screen readers, enhance SEO by helping search engines understand content hierarchy, and make code more maintainable and readable for developers.
 
-**Semantic Elements Used:**
-- `<header>` - Contains personal information, name, title, and contact details
-- `<main>` - Wraps all primary content sections
-- `<section>` - Organizes content into logical groups (education, skills, experience)
-- `<article>` - Represents individual entries within sections (education entry, job positions)
-- `<address>` - Properly marks up contact information
-- `<time>` - Semantically represents date ranges for education and work experience
-- `<footer>` - Contains social media links and external references
+**How?** The implementation uses proper HTML5 semantic elements throughout the document structure:
 
-**Heading Hierarchy:**
-- Proper heading structure: `<h1>` for main title, `<h2>` for section headings, `<h3>` for subsection titles
-- Logical content flow and accessibility compliance
+```html
+<header>
+    <h1>Your Name</h1>
+    <address>
+        <p>123 Your Street</p>
+        <a href="mailto:no_reply@example.com">no_reply@example.com</a>
+    </address>
+</header>
+<main>
+    <section id="education">
+        <article>
+            <time>Month 20xx - Month 20xx</time>
+        </article>
+    </section>
+</main>
+```
 
-**Accessibility Features:**
-- Semantic markup improves screen reader navigation
-- Proper use of `<address>` for contact information
-- `<time>` elements enhance date recognition for assistive technologies
-
-This semantic structure provides clear content organization, improves SEO, and ensures accessibility compliance while maintaining clean, maintainable code.
+The structure uses header/main/footer for layout, section/article for content organization, address for contact info, and time elements for dates.
 
 ## Single-page layout with sections for education, skills, and career history.
 
-The CV is implemented as a comprehensive single-page layout that organizes all content within one HTML document:
+**What?** A single-page layout contains all CV content within one HTML document organized into distinct sections without requiring navigation between pages.
 
-**Layout Structure:**
-- Single HTML file containing all CV information without external page dependencies
-- Responsive design using CSS styling for optimal viewing across devices
-- Clean, professional layout with consistent spacing and typography
+**Why?** This design provides immediate access to all information, improves user experience by eliminating page loads, and creates a cohesive presentation suitable for both digital viewing and printing.
 
-**Required Sections Implemented:**
+**How?** The layout implements three main content sections within a structured HTML document:
 
-1. **Education Section** (`<section id="education">`)
-   - Contains academic background information
-   - Uses `<article>` elements for individual education entries
-   - Includes school name, location, degree, and time periods using semantic `<time>` elements
-   - Provides space for academic achievements and activities
+```html
+<main>
+    <section id="education">
+        <h2>Education</h2>
+        <article>
+            <h3>School Name, Location - Degree</h3>
+        </article>
+    </section>
+    <section id="skills">
+        <h2>Skills</h2>
+        <p>HTML, CSS, JavaScript, Accessibility...</p>
+    </section>
+    <section id="experience">
+        <h2>Experience</h2>
+        <article>
+            <h3>Company Name, Location - Job Title</h3>
+        </article>
+    </section>
+</main>
+```
 
-2. **Skills Section** (`<section id="skills">`)
-   - Showcases technical and professional competencies
-   - Lists relevant skills including HTML, CSS, JavaScript, and design tools
-   - Organized as readable paragraph format for easy scanning
+Each section uses semantic elements and consistent styling to create a professional, scannable CV format.
 
-3. **Career History Section** (`<section id="experience">`)
-   - Documents professional work experience
-   - Multiple `<article>` elements for individual job positions
-   - Each position includes company name, location, job title, and employment dates
-   - Uses `<ul>` and `<li>` elements for achievement lists
-   - Semantic `<time>` elements for employment periods
+## SEO meta tags in the head section.
 
-**Additional Sections:**
-- Personal information header with contact details
-- Footer section for social media and professional links
+**What?** SEO meta tags are HTML elements in the head section that provide structured information about the webpage to search engines and browsers.
 
-The single-page design ensures all information is accessible without navigation, creating a cohesive and professional presentation suitable for both digital viewing and printing.
+**Why?** These tags improve search engine rankings by helping crawlers understand page content, display attractive snippets in search results, and categorize the website properly. They enhance discoverability and click-through rates from search engine results pages.
+
+**How?** The implementation uses four essential meta tags within the HTML head section:
+
+```html
+<meta name="description" content="Professional CV of a Junior Frontend Developer showcasing education, skills, and experience in web development.">
+<meta name="keywords" content="frontend developer, web development, HTML, CSS, JavaScript, CV, resume">
+<meta name="author" content="Your Name">
+<meta name="robots" content="index, follow">
+```
+
+The description tag provides search result snippets, keywords help with content classification, author identifies the creator, and robots directs search engine behavior.
+
+## OG tags for better social media sharing.
+
+**What?** Open Graph (OG) tags are meta tags that control how content appears when shared on social media platforms like Facebook, LinkedIn, and Twitter.
+
+**Why?** These tags ensure consistent, attractive presentation when the webpage is shared, displaying custom titles, descriptions, and images instead of default auto-generated content. They significantly improve click-through rates and professional appearance on social platforms.
+
+**How?** The implementation includes essential OG properties and Twitter Card tags in the head section:
+
+```html
+<meta property="og:title" content="Your Name - Junior Frontend Developer CV">
+<meta property="og:description" content="Professional CV showcasing education, skills, and experience in web development.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Your Name CV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Name - Junior Frontend Developer CV">
+```
+
+These tags control the title, description, content type, and site name displayed when shared on social media platforms.
+
+## A favicon linked in the head section.
+
+**What?** A favicon is a small icon displayed in browser tabs, bookmarks, and browser interfaces to visually identify the website.
+
+**Why?** Favicons enhance brand recognition, improve user experience by making the site easily identifiable among multiple tabs, and provide professional appearance. They also appear in bookmarks and browser history for better visual navigation.
+
+**How?** Multiple favicon formats are implemented to ensure compatibility across different devices and browsers:
+
+```html
+<link rel="icon" href="./public/favicon_io/favicon.ico" type="image/x-icon">
+<link rel="icon" href="./public/favicon_io/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="./public/favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="./public/favicon_io/apple-touch-icon.png">
+```
+
+The implementation includes standard .ico format, multiple PNG sizes for different display contexts, and Apple touch icon for iOS devices.
