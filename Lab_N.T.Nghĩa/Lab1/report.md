@@ -24,8 +24,6 @@
 </main>
 ```
 
-The structure uses header/main/footer for layout, section/article for content organization, address for contact info, and time elements for dates.
-
 ## Single-page layout with sections for education, skills, and career history.
 
 **What?** A single-page layout contains all CV content within one HTML document organized into distinct sections without requiring navigation between pages.
@@ -48,8 +46,6 @@ The structure uses header/main/footer for layout, section/article for content or
 </html>
 ```
 
-Each section uses semantic elements and consistent styling to create a professional, scannable CV format.
-
 ## SEO meta tags in the head section.
 
 **What?** SEO meta tags are HTML elements in the head section that provide structured information about the webpage to search engines and browsers.
@@ -64,8 +60,6 @@ Each section uses semantic elements and consistent styling to create a professio
 <meta name="author" content="Your Name">
 <meta name="robots" content="index, follow">
 ```
-
-The description tag provides search result snippets, keywords help with content classification, author identifies the creator, and robots directs search engine behavior.
 
 ## OG tags for better social media sharing.
 
@@ -83,9 +77,6 @@ The description tag provides search result snippets, keywords help with content 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your Name - Junior Frontend Developer CV">
 ```
-
-These tags control the title, description, content type, and site name displayed when shared on social media platforms.
-
 ## A favicon linked in the head section.
 
 **What?** A favicon is a small icon displayed in browser tabs, bookmarks, and browser interfaces to visually identify the website.
@@ -100,5 +91,3 @@ These tags control the title, description, content type, and site name displayed
 <link rel="icon" href="./public/favicon_io/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="./public/favicon_io/apple-touch-icon.png">
 ```
-
-The implementation includes standard .ico format, multiple PNG sizes for different display contexts, and Apple touch icon for iOS devices.
