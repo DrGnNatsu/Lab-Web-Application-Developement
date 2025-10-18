@@ -1,2 +1,2 @@
 # Lab-Web-Application-Developement
-Labotary IU - Nghia
+Laboratory IU - Nghia

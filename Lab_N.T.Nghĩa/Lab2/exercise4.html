@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>San Joaquin Valley Town Fall</title>
+    <style>
+        header {
+            display: flex;
+            flex-direction: row;
+            padding: 0.5rem;
+            gap: 1rem;
+            align-items: stretch;
+        }
+        #title {
+            flex: 1;
+            color: orange;
+        }
+        #logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #logo img {
+            object-fit: cover;
+            display: block;
+        }
+        main {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        li {
+            margin-top: 0.125rem;
+        }
+        article {
+            flex: 6;
+        }
+        aside {
+            flex: 4;
+            background-color: rgb(255, 217, 161);
+            overflow: auto;
+            padding: 0.5rem;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <header style="border-bottom: 2px solid rgb(255, 179, 0); margin-bottom: 1rem;">
+        <div id="logo">
+            <img src="./public/IU.png" alt="IU Image" class="img-fluid mb-3" width="64" height="64">
+        </div>
+        <div id="title">
+            <h1>San Joaquin Valley Town Fall</h1>
+            <h3 style="color: black">Bringing cutting-edge speakers to the valley.</h3>
+        </div>
+    </header>
+    <main>
+        <article>
+            <section>
+                <h1>This season's guest speakers</h1>
+                <ul>
+                    <li>October: <a href="#">David Brancaccio</a></li>
+                    <li>November: <a href="#">Andrew Ross Sorkin</a></li>
+                    <li>January: <a href="#">Amy Chua</a></li>
+                    <li>February: <a href="#">Scott Sampson</a></li>
+                    <li>March: <a href="#">Carlos Eire</a></li>
+                    <li>April: <a href="#">Ronan Tynan</a></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Looking for a unique gift?</h2>
+                <p>
+                    Town Hall has the answer. For only $100, you can get a book of tickets for all of the remaining speakers.
+                    And the bargain includes a second book of tickets for a companion.
+                </p>
+                <p>
+                    Or, for $50, you can give yourself the gift of our speakers, and still get an extra ticket for a companion,
+                    but for just one of the events.
+                </p>
+                <p>See you at the next show!</p>
+            </section>
+            <section><p><strong>Contact us by phone</strong> at (559) 555-1212 for ticket information.</p></section>
+        </article>
+
+        <aside>
+            <h2>Lecture notes</h2>
+            <h3 style="color: brown">Event change for November</h3>
+            <p>
+                SJV Town Hall is pleased to announce the addition of award-winning author Andrew Ross Sorkin.
+                The appearance of previously scheduled speaker, Greg Mortenson, has been postponed.
+            </p>
+
+            <h3  style="color: brown">Lecture day, time, and location</h3>
+            <p>
+                All one-hour lectures are on the second Wednesday of the month beginning at 10:30 a.m.
+                at William Saroyan Theatre, 700 M Street, Fresno, CA.
+            </p>
+        </aside>
+    </main>
+    <footer style="border-top: 2px solid rgb(255, 179, 0); margin-top: 1rem;">
+        <p>© Copyright <span id="year">2022</span> San Joaquin Valley Town Fall.</p>
+    </footer>
+</body>
+</html>

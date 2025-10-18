@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        td > label {
+            font-weight: bold;
+            padding-left: 0.125rem;
+        }
+    </style>
+</head>
+<body>
+<form class="container items-center justify-center
+            mt-5 border border-2 border-primary py-1 px-4"
+      style="width: 35rem;">
+    <header>
+        <img src="./public/IU.png" alt="IU Image" class="img-fluid mb-3" width="150" height="150">
+        <h2 style="color: #1B7C7C">Survey</h2>
+        <p>If you have a moment, we'd appreciate it if you would fill out this survey.</p>
+    </header>
+
+    <main>
+        <section class="d-flex flex-column gap-2" >
+            <h3 style="color: #1B7C7C">Your information:</h3>
+            <table>
+                <tr>
+                    <td><label for="fname">First Name:</label></td>
+                    <td><input type="text" name="first_name" id="fname" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="lname">Last Name:</label></td>
+                    <td><input type="text" name="last_name" id="lname" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email Address:</label></td>
+                    <td><input type="email" name="email" id="email" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><label for="dob">Date of Birth:</label></td>
+                    <td><input type="date" name="dob" id="dob" class="form-control"></td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="d-flex flex-column">
+            <h3 style="color: #1B7C7C">How did you hear us:</h3>
+            <article class="d-flex flex-row justify-content-between">
+                <div>
+                    <input type="radio" id="search_engine" name="hear_us" value="search_engine">
+                    <label for="search_engine" >Search Engine</label>
+                </div>
+                <div>
+                    <input type="radio" id="word_of_mouth" name="hear_us" value="word_of_mouth">
+                    <label for="word_of_mouth">Word of mouth</label>
+                </div>
+                <div>
+                    <input type="radio" id="social_media" name="hear_us" value="social_media">
+                    <label for="social_media">Social media</label>
+                </div>
+                <div>
+                    <input type="radio" id="other" name="hear_us" value="other">
+                    <label for="other">Other</label>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h3 style="color: #1B7C7C">Would you like to receive announcements abouts new CDs and special offers?</h3>
+            <article class="d-flex flex-column">
+                <div>
+                    <input type="checkbox" id="receive_announcements" name="receive_announcements" value="yes">
+                    <label for="receive_announcements">YES, I'd like that.</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="send_postal" name="send_postal" value="yes">
+                    <label for="send_postal">YES, please send me postal mail announcements.</label>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="d-flex gap-3 align-items-center mt-2">
+        <label for="contact" class="mr-2">Please contact me by:</label>
+        <select id="contact">
+            <option value="email_or_postal">Email or Postal</option>
+            <option value="email_only">Email only</option>
+            <option value="Postal mail only">Postal mail only</option>
+        </select>
+    </footer>
+    <button type="submit" class="btn mt-3 mb-2" style="border: 1px solid black; background: oklch(87.2% 0.01 258.338);">Submit</button>
+</form>
+</body>
