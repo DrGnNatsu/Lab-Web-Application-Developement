@@ -1,0 +1,176 @@
+@import "main.css";
+
+/* Services Form Container */
+#serviceForm {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-secondary);
+}
+
+/* Fieldset Styling */
+fieldset {
+    border: 1px solid var(--highlight);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--surface);
+}
+
+legend {
+    font-weight: 600;
+    padding: 0 0.5rem;
+    color: var(--text-primary);
+}
+
+/* Form Controls Container */
+fieldset > div {
+    margin-bottom: 1.25rem;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[list],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--highlight);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+/* Special Input Types */
+input[type="color"] {
+    width: 100px;
+    height: 40px;
+    padding: 0.25rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+/* Radio and Checkbox Groups */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* Radio/Checkbox Labels */
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+/* Hint Text */
+[id$="-hint"] {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Error Messages */
+[id$="-error"] {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    min-height: 1.25em;
+}
+
+/* Focus States */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--highlight);
+    box-shadow: 0 0 0 2px rgba(var(--highlight), 0.1);
+}
+
+/* Invalid States */
+input:invalid:not(:placeholder-shown),
+select:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+    border-color: #dc3545;
+}
+
+/* Buttons Container */
+form > div:last-child {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+/* Buttons */
+button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button[type="submit"] {
+    background: var(--highlight);
+    color: white;
+    border: none;
+}
+
+button[type="reset"] {
+    background: transparent;
+    border: 1px solid var(--highlight);
+    color: var(--text-primary);
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    fieldset {
+        padding: 2rem;
+    }
+
+    /* Two-column layout for certain fieldsets */
+    fieldset > div.row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+}
+
+/* Dark Mode Adjustments handled by CSS variables */

@@ -1,0 +1,205 @@
+@import "main.css";
+
+/* Header Styles */
+#projectsHeader {
+    background: var(--surface);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+    margin-top: 5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.headerContent h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--text-secondary);
+}
+
+/* Project Container */
+#projectsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+/* Project Detail Section */
+.project-detail {
+    margin-bottom: var(--spacing-lg);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.project-header {
+    padding: var(--spacing-xl);
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.project-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--text-primary);
+}
+
+.project-links {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+}
+
+.project-image {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    background: var(--surface);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.project-info {
+    padding: var(--spacing-lg) 0;
+}
+
+.project-description h3 {
+    color: var(--highlight);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.project-description p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+.project-description ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+.project-description ul li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.project-description ul li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--highlight);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.tech-tag {
+    background: rgba(102, 252, 241, 0.1);
+    color: var(--highlight);
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--transition-base);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--highlight);
+    color: var(--surface);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--highlight);
+    color: var(--highlight);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .project-content {
+        grid-template-columns: 1fr;
+    }
+
+    .project-links {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .tech-stack {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    #projectsHeader {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .project-detail {
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .project-header, .project-content {
+        padding: var(--spacing-lg);
+    }
+}

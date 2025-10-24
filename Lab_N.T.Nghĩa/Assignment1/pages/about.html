@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About me</title>
+
+    <link rel="stylesheet" href="../assets/main.css">
+    <link rel="stylesheet" href="../assets/nav.css">
+    <link rel="stylesheet" href="../assets/footer.css">
+    <link rel="stylesheet" href="../assets/about.css">
+
+    <link rel="icon" href="../assets/favicon.jpg" type="image/x-icon">
+
+</head>
+<body>
+    <nav id="navbar">
+    <div id="navContainer">
+        <!-- Navbar logo-->
+        <div id="navLogo">
+            <span id="logoIcon">◆</span>
+            <span id="logoText">Portfolio</span>
+        </div>
+
+        <!-- Using for the small screen (Phone)-->
+        <button id="navToggle" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Using for the medium and large screen (Tablet, Desktop, ...)-->
+        <ul id="navMenu">
+            <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
+            <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Theme Toggle: default (system)-->
+        <button id="themeToggle" aria-label="Toggle theme">
+            <span id="themeIcon">🌓</span>
+        </button>
+    </div>
+</nav>
+
+    <header id="aboutHeader">
+        <div class="headerContent">
+            <h1>About Me</h1>
+            <p class="subtitle">Full-Stack Developer & Machine Learning Engineer</p>
+        </div>
+    </header>
+
+    <main id="aboutContainer">
+        <section id="profileSection">
+            <div class="profile-content">
+                <div class="profile-image">
+                    <img src="../public/avatar_temp.jpg" alt="Pham Hoang Phuong">
+                </div>
+                <div class="profile-text">
+                    <h2>Hello, I'm Pham Hoang Phuong</h2>
+                    <p>I'm a passionate Full-Stack Developer with expertise in Machine Learning. With a strong foundation in both front-end and back-end technologies, I create innovative solutions that bridge the gap between user experience and artificial intelligence.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="journeySection">
+            <h2>My Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content education-content">
+                        <div class="education-info">
+                            <h3>Education</h3>
+                            <p>Bachelor's Degree in Computer Science</p>
+                            <p>National University of Ho Chi Minh City - International university</p>
+                        </div>
+                        <div class="map-container">
+                            <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.067074786147!2d106.80131661533445!3d10.877915360233667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d8a5f4e477e9%3A0x29d5aeb365cee20b!2sInternational%20University%20-%20Vietnam%20National%20University%20HCMC!5e0!3m2!1sen!2s!4v1647850455547!5m2!1sen!2s"
+                                    class="responsive-map"
+                                    title="International University - Vietnam National University HCMC location"
+                                    height="200"
+                                    allowfullscreen
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <div>
+                            <div class="video-embed">
+                                <iframe
+                                        src="https://www.youtube.com/embed/Zl0BwF27_qA?si=Px5tHiiJT6weKQam"
+                                        title="Video"
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen
+                                        loading="lazy">
+                                </iframe>
+                            </div>
+                            <p class="video-caption" style="margin-top:0.5rem;">
+                                <a href="https://youtu.be/Zl0BwF27_qA?si=Px5tHiiJT6weKQam" target="_blank" rel="noopener">Open on YouTube</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Current Focus</h3>
+                        <p>Specializing in AI/ML applications and modern web development</p>
+                        <ul>
+                            <li>Full-Stack Development</li>
+                            <li>Machine Learning</li>
+                            <li>Cloud Technologies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interestsSection">
+            <h2>Beyond Coding</h2>
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <h3>Research</h3>
+                    <p>Exploring new technologies and staying updated with the latest developments in AI and web technologies.</p>
+                </div>
+                <div class="interest-card">
+                    <h3>Innovation</h3>
+                    <p>Creating solutions that combine modern web development with machine learning capabilities.</p>
+                </div>
+                <div class="interest-card">
+                    <h3>Learning</h3>
+                    <p>Continuous learning and improvement in both technical and soft skills.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="futureSection">
+            <h2>Future Path</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Short-term Goals (2024-2025)</h3>
+                        <ul>
+                            <li>Complete Bachelor's degree with distinction</li>
+                            <li>Obtain AWS Cloud Practitioner certification</li>
+                            <li>Build and launch two major full-stack projects</li>
+                            <li>Contribute to open-source ML projects</li>
+                            <li>Junior Rust Developer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Mid-term Goals (2025-2026)</h3>
+                        <ul>
+                            <li>Secure position as Full-Stack Developer</li>
+                            <li>Master React and Node.js ecosystems</li>
+                            <li>Develop expertise in MLOps practices</li>
+                            <li>Create a tech blog with weekly content</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Long-term Vision (2026+)</h3>
+                        <ul>
+                            <li>Lead development teams on AI-powered projects</li>
+                            <li>Launch a SaaS product combining ML and web technologies</li>
+                            <li>Speak at tech conferences</li>
+                            <li>Mentor aspiring developers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Areas of Growth</h3>
+                        <ul>
+                            <li>Advanced Machine Learning Algorithms</li>
+                            <li>Cloud Architecture Design</li>
+                            <li>System Design & Scalability</li>
+                            <li>Technical Leadership Skills</li>
+                            <li><strong>MAYBE:</strong>Game development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div id="footerContainer">
+            <section class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Connection</h4>
+                <ul>
+                    <li><a href="https://github.com/DrGnNatsu" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/ph%C6%B0%C6%A1ng-ph%E1%BA%A1m-b69b56290/" target="_blank">LinkedIn</a></li>
+                    <li><a href="contact.html">Email</a></li>
+                </ul>
+            </section>
+        </div>
+        <div id="footerBottom">
+            <p>&copy; 2025 Pham Hoang Phuong. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../JS/navToggle.js"></script>
+    <script src="../JS/themeToggle.js"></script>
+</body>
+</html>

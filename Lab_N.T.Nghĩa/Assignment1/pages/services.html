@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+
+    <link rel="stylesheet" href="../assets/main.css">
+    <link rel="stylesheet" href="../assets/nav.css">
+    <link rel="stylesheet" href="../assets/footer.css">
+    <link rel="stylesheet" href="../assets/services.css">
+
+    <link rel="icon" href="../assets/favicon.jpg" type="image/x-icon">
+</head>
+<body>
+    <nav id="navbar">
+        <div id="navContainer">
+            <!-- Navbar logo-->
+            <div id="navLogo">
+                <span id="logoIcon">◆</span>
+                <span id="logoText">Portfolio</span>
+            </div>
+
+            <!-- Using for the small screen (Phone)-->
+            <button id="navToggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Using for the medium and large screen (Tablet, Desktop, ...)-->
+            <ul id="navMenu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
+                <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Theme Toggle: default (system)-->
+            <button id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌓</span>
+            </button>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Services</h1>
+        <p>Fill out the form below to request services or inquire about collaborations.</p>
+    </header>
+    <form id="serviceForm" method="post" action="/submit-services">
+        <fieldset>
+            <legend>Personal Information</legend>
+            <div>
+                <label for="fullname">Full name</label>
+                <input id="fullname" name="fullname" type="text" required minlength="2" maxlength="100"
+                       aria-describedby="fullname-hint fullname-error" />
+                <div id="fullname-hint">Required — 2–100 characters.</div>
+                <div id="fullname-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required
+                   aria-describedby="email-hint email-error" />
+                <div id="email-hint">Enter a valid email address (e.g. user@example.com).</div>
+                <div id="email-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="phone">Phone (international)</label>
+                <input id="phone" name="phone" type="tel" required
+                   pattern="^\+?\d{7,15}$"
+                   title="Use international digits only, e.g. +1234567890"
+                   placeholder="+1234567890"
+                   aria-describedby="phone-hint phone-error" />
+                <div id="phone-hint">Include country code, 7–15 digits, optional leading +.</div>
+                <div id="phone-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <input id="source" name="source" type="hidden" value="services-page" />
+        </fieldset>
+
+        <fieldset>
+            <legend>Account / Preferences</legend>
+
+            <div>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required minlength="8"
+                   pattern="(?=.*[A-Za-z])(?=.*\d).{8,}"
+                   title="At least 8 characters, including letters and numbers"
+                   aria-describedby="password-hint password-error" />
+                <div id="password-hint">Minimum 8 characters with letters and numbers.</div>
+                <div id="password-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="experience">Years of experience</label>
+                <input id="experience" name="experience" type="number" required min="0" max="50" step="1" value="0"
+                   aria-describedby="experience-hint experience-error" />
+                <div id="experience-hint">Enter whole years (0–50).</div>
+                <div id="experience-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="urgency">Project urgency</label>
+                <input id="urgency" name="urgency" type="range" min="0" max="100" step="5" value="20"
+                   aria-describedby="urgency-hint urgency-error" />
+                <div id="urgency-hint">0 = low, 100 = highest urgency.</div>
+                <div id="urgency-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="favcolor">Preferred color</label>
+                <input id="favcolor" name="favcolor" type="color" value="#0077cc"
+                   aria-describedby="favcolor-hint favcolor-error" />
+                <div id="favcolor-hint">Pick a color that represents your brand.</div>
+                <div id="favcolor-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="resume">Upload a resume (PDF, PNG, JPG)</label>
+                <input id="resume" name="resume" type="file" accept=".pdf,image/png,image/jpeg"
+                   aria-describedby="resume-hint resume-error" />
+                <div id="resume-hint">Optional. Max size limits are enforced server-side.</div>
+                <div id="resume-error" role="status" aria-live="polite"></div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Work Type</legend>
+
+            <div>
+                <p>Primary focus</p>
+                <div role="radiogroup" aria-labelledby="focus-legend">
+                    <div id="focus-legend" hidden>Primary focus (required)</div>
+                    <label><input type="radio" name="focus" value="frontend" required /> Frontend</label>
+                    <label><input type="radio" name="focus" value="backend" /> Backend</label>
+                    <label><input type="radio" name="focus" value="fullstack" /> Full-stack</label>
+                </div>
+                <div id="focus-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <p>Services interested in</p>
+                <label><input type="checkbox" name="services" value="design" /> Design</label>
+                <label><input type="checkbox" name="services" value="development" /> Development</label>
+                <label><input type="checkbox" name="services" value="consulting" /> Consulting</label>
+                <div id="services-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="technologies">Preferred technologies</label>
+                <select id="technologies" name="technologies" required
+                        aria-describedby="technologies-hint technologies-error">
+                    <option value="" disabled selected>Select one</option>
+                    <optgroup label="Frontend">
+                        <option value="react">React</option>
+                        <option value="vue">Vue</option>
+                        <option value="svelte">Svelte</option>
+                    </optgroup>
+                    <optgroup label="Backend">
+                        <option value="node">Node.js</option>
+                        <option value="python">Python</option>
+                        <option value="go">Go</option>
+                    </optgroup>
+                </select>
+                <div id="technologies-hint">Choose the primary technology for your project.</div>
+                <div id="technologies-error" role="status" aria-live="polite"></div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Details</legend>
+
+            <div>
+                <label for="notes">Project summary</label>
+                <textarea id="notes" name="notes" rows="4" required minlength="20"
+                          aria-describedby="notes-hint notes-error"
+                          placeholder="Briefly describe your project and goals"></textarea>
+                <div id="notes-hint">Minimum 20 characters.</div>
+                <div id="notes-error" role="status" aria-live="polite"></div>
+            </div>
+
+            <div>
+                <label for="city">City (suggestions)</label>
+                <input id="city" name="city" list="cities" aria-describedby="city-hint city-error" />
+                <datalist id="cities">
+                    <option value="New York"></option>
+                    <option value="London"></option>
+                    <option value="Tokyo"></option>
+                    <option value="Ho Chi Minh City"></option>
+                </datalist>
+                <div id="city-hint">Start typing to see suggestions.</div>
+                <div id="city-error" role="status" aria-live="polite"></div>
+            </div>
+        </fieldset>
+
+        <div>
+            <button type="reset">Reset</button>
+            <button type="submit">Send request</button>
+        </div>
+      </form>
+
+    <footer>
+        <div id="footerContainer">
+            <section class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Connection</h4>
+                <ul>
+                    <li><a href="https://github.com/DrGnNatsu" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/ph%C6%B0%C6%A1ng-ph%E1%BA%A1m-b69b56290/" target="_blank">LinkedIn</a></li>
+                    <li><a href="contact.html">Email</a></li>
+                </ul>
+            </section>
+        </div>
+        <div id="footerBottom">
+            <p>&copy; 2025 Pham Hoang Phuong. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../JS/navToggle.js"></script>
+    <script src="../JS/themeToggle.js"></script>
+    <script src="../JS/formServices.js"></script>
+</body>
+</html>

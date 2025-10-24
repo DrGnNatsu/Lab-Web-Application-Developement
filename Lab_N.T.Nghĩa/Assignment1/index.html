@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO tage -->
+    <meta name="description" content="Portfolio of Pham Hoang Phuong - Full-stack developer and ML engineer showcasing projects in web development, machine learning, and database optimization.">
+    <meta name="keywords" content="full-stack developer, machine learning, React, Node.js, Python, PostgreSQL, portfolio">
+    <meta name="author" content="Pham Hoang Phuong">
+    <meta name="robots" content="index, follow">
+
+    <!-- Social Media (OG) SEO tag-->
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="drgnnatsu.github.io">
+    <meta property="og:title" content="Pham Hoang Phuong | Full-Stack Developer & ML Engineer">
+    <meta property="og:description" content="Full-stack developer specializing in React, Node.js, and Machine Learning. Crafting modern digital experiences with cutting-edge technology.">
+    <meta property="og:image" content="">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pham Hoang Phuong | Full-Stack Developer & ML Engineer">
+    <meta name="twitter:description" content="Full-stack developer specializing in React, Node.js, and Machine Learning. Crafting modern digital experiences with cutting-edge technology.">
+    <meta name="twitter:image" content="">
+
+    <!-- Title -->
+    <title>Personal Site</title>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="assets/nav.css">
+    <link rel="stylesheet" href="assets/footer.css">
+    <link rel="stylesheet" href="assets/home.css">
+
+    <link rel="icon" href="/assets/favicon.jpg" type="image/x-icon">
+</head>
+<body>
+    <nav id="navbar">
+        <div id="navContainer">
+            <!-- Navbar logo-->
+            <div id="navLogo">
+                <span id="logoIcon">◆</span>
+                <span id="logoText">Portfolio</span>
+            </div>
+
+            <!-- Using for the small screen (Phone)-->
+            <button id="navToggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Using for the medium and large screen (Tablet, Desktop, ...)-->
+            <ul id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="pages/about.html" class="nav-link">About Me</a></li>
+                <li><a href="pages/projects.html" class="nav-link">Projects</a></li>
+                <li><a href="pages/blog.html" class="nav-link">Blog</a></li>
+                <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Theme Toggle: default (system)-->
+            <button id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌓</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="home">
+        <div id="introContainer">
+            <article id="introText">
+                <h1 id="introTitle">
+                    <span class="gradient-text">Welcome to Sites</span>
+                    <span class="gradient-text-2">I'm your solution</span>
+                </h1>
+                <p id="introSubtitle">Crafting intelligent, modern digital experiences with cutting-edge technology</p>
+                <div id="introButtons">
+                    <a href="pages/projects.html" class="btn btn-primary">Explore My Work</a>
+                    <a href="pages/contact.html" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </article>
+
+            <div id="introVisual">
+                <div class="floating-card card-1" tabindex="0" role="button" aria-label="Feature card">
+                    <div class="card-icon">⚡</div>
+                    <p>Performance</p>
+                </div>
+                <div class="floating-card card-2" tabindex="0" role="button" aria-label="Feature card">
+                    <div class="card-icon">🎨</div>
+                    <p>Design</p>
+                </div>
+                <div class="floating-card card-3"  tabindex="0" role="button" aria-label="Feature card">
+                    <div class="card-icon">🔧</div>
+                    <p>Technology</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="scrollIndicator">
+            <span>Scroll to explore</span>
+            <div id="scrollArrow"></div>
+        </div>
+    </section>
+
+    <!-- Project Preview -->
+    <section id="projectPreview">
+        <article class="section-header">
+            <h2>Featured Projects</h2>
+            <p>Showcasing my latest work and innovations</p>
+        </article>
+
+        <div id="projectGrid">
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="public/pgtuner.png" alt="PGTUNER">
+                </div>
+                <div class="project-content">
+                    <h3>PostgresSQL Tuner</h3>
+                    <p>The Database tuner optimize the PostgresSQL </p>
+                    <div class="project-tags">
+                        <span class="tag">DB</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <a href="pages/projects.html" class="project-link">View Project →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="public/skyline.png" alt="World Plane Visualisation Project">
+                </div>
+                <div class="project-content">
+                    <h3>World Plane Visualisation</h3>
+                    <p>Full-stack web application with data from 2018-2023</p>
+                    <div class="project-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">D3.js</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <a href="pages/projects.html" class="project-link">View Project →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="public/movie.png" alt="Movie Recommendation Project">
+                </div>
+                <div class="project-content">
+                    <h3>Recommendation Movie</h3>
+                    <p>Recommendation Movie (200K movies) plus View Party</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">ML</span>
+                        <span class="tag">React</span>
+                    </div>
+                    <a href="pages/projects.html" class="project-link">View Project →</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <div class="image-placeholder">Project 4</div>
+                </div>
+                <div class="project-content">
+                    <h3>Crawling</h3>
+                    <p>Crawling sites Tools</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+
+                    </div>
+                    <a href="pages/projects.html" class="project-link">View Project →</a>
+                </div>
+            </article>
+        </div>
+
+        <div id="projectButton">
+            <a href="pages/projects.html" class="btn btn-primary">View All Projects</a>
+        </div>
+    </section>
+
+    <!-- Skills Preview -->
+    <section id="skillPreview">
+        <article class="section-header">
+            <h2>Core Competencies</h2>
+            <p>Technologies and skills I specialize in</p>
+        </article>
+        <div id="skillContainer">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">React</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">TypeScript</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">CSS/Design</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Node.js</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Python</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Databases</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>AI/ML</h3>
+                <div class="skill-list">
+                    <div class="skill-item">
+                        <span class="skill-name">Machine Learning</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Data Science</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="statsSection">
+        <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1+</div>
+            <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Technologies</div>
+        </div>
+    </section>
+
+    <!-- Testimonials Preview -->
+    <section id="testimonialsPreview">
+        <div class="section-header">
+            <h2>What People Say</h2>
+            <p>Feedback from clients and collaborators</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Exceptional work and attention to detail. Delivered beyond expectations."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MT</div>
+                    <div>
+                        <div class="author-name">Mai Long Thien</div>
+                        <div class="author-title">CEO, Tech Startup</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Best UI/UX"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">M</div>
+                    <div>
+                        <div class="author-name">Minh</div>
+                        <div class="author-title">Ai Senior, Tech Lead</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contactSection">
+        <div id="contactContent">
+            <h2>Ready to Collaborate?</h2>
+            <p>Let's create something extraordinary together</p>
+            <a href="pages/contact.html" class="btn btn-primary btn-large">Start a Project</a>
+        </div>
+    </section>
+
+    <footer>
+        <div id="footerContainer">
+            <section class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="pages/projects.html">Projects</a></li>
+                    <li><a href="pages/skills.html">Skills</a></li>
+                    <li><a href="pages/blog.html">Blog</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="pages/resume.html">Resume</a></li>
+                    <li><a href="pages/certifications.html">Certifications</a></li>
+                    <li><a href="pages/services.html">Services</a></li>
+                    <li><a href="pages/policy.html">Privacy Policy</a></li>
+                </ul>
+            </section>
+
+            <section class="footer-section">
+                <h4>Connection</h4>
+                <ul>
+                    <li><a href="https://github.com/DrGnNatsu" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/ph%C6%B0%C6%A1ng-ph%E1%BA%A1m-b69b56290/" target="_blank">LinkedIn</a></li>
+                    <li><a href="pages/contact.html">Email</a></li>
+                </ul>
+            </section>
+        </div>
+        <div id="footerBottom">
+            <p>&copy; 2025 Pham Hoang Phuong. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/JS/navToggle.js"></script>
+    <script src="/JS/themeToggle.js"></script>
+    <script src="JS/home.js"></script>
+
+</body>
+</html>
