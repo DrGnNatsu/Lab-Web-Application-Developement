@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* reset */
+        body {
+            margin: auto;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        /* header */
+        header {
+            display: flex;
+            flex-direction: row;
+            align-items: left;
+            padding: 0.5rem;
+            gap: 0.5rem;
+            background-color:blanchedalmond;
+            border: 1px solid black;
+        }   
+        #image {
+            object-fit: fill;
+            width: 100px;
+            height: 100px;
+        }
+        #text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+            gap: 0.2rem;
+        }
+        #text h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 1.5rem;
+            color: red;
+        }
+        #text h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+            color: black;
+        }
+        /* navigation */
+        nav {
+            background-color: brown;
+            border: 1px solid black;
+
+        }
+        nav > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row; 
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        nav > ul > li {
+            display: inline;
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            position: relative; /* For dropdown positioning */
+        }
+        nav > ul > li > a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        nav > ul > li > a:hover {
+            color: gray;
+        }
+        nav > ul > li:hover {
+            background-color: burlywood;
+        }
+        /* Dropdown menu */
+        nav > ul > li > ul {
+            display: none; /* Hide dropdown by default */
+            position: absolute;
+            top: 100%; /* Position below the parent menu item */
+            left: 0;
+            background-color: brown;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border: 1px solid black;
+            z-index: 1000;
+        }
+        nav > ul > li > ul > li {
+            padding: 0.5rem;
+            text-align: left;
+        }
+        nav > ul > li > ul > li > a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        nav > ul > li > ul > li > a:hover {
+            color: gray;
+        }
+        nav > ul > li > ul > li:hover {
+            background-color: burlywood;
+        }
+        nav > ul > li:hover > ul {
+            display: block;
+            width: 100%;
+        }
+        /* Main */
+        main{
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            background-color: blanchedalmond;
+        }
+        aside {
+            flex: 2;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        aside > h2 {
+            margin: 0;
+            padding: 0;
+            color: brown;
+        }
+        .guest {
+            display: flex;
+            flex-direction: column;
+        }
+        .date {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .name {
+            font-size: 1.2rem;
+            color: blue;
+        }
+
+        .main-content {
+            flex: 3;
+            max-width: 800px
+            padding: 1rem;
+            justify-content: left;
+            align-items: flex-start;
+        }
+
+        /* Footer */
+        footer {
+            background-color: brown;
+            color: white;
+            text-align: center;
+            padding: 0.25rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        #welcome h2 {
+            color: brown;
+        }
+
+
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div id="image">
+            <img src="logo.png" alt="Logo" width="100" height="100">
+        </div>
+        <div id="text">
+            <h1>San Joaquin Valley Town Hall</h1>
+            <h3>Celebrating our 75<sup>th</sup> Anniversary</h3>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="speaker.html">Speaker</a></li>
+            <li><a href="luncheons.html">Lunches</a></li>
+            <li><a href="tickets.html">Tickets</a></li>
+            <li>
+                <a href="about.html">About Us</a>
+                <ul>
+                    <li><a href="history.html">Our History</a></li>
+                    <li><a href="mission.html">Board of Directors</a></li>
+                    <li><a href="team.html">Past Speakers</a></li>
+                    <li><a href="contact.html">Contact Information</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="home">
+        <aside>
+            <h2>Guest Speakers</h2>
+            <section class="guest">
+                <h3 class="date">October</h3>
+                <a class="name" href="speaker1.html">David Brancaccio</a>
+                <img class="photo" src="speaker1.jpg" alt="David Brancaccio">
+            </section>
+            <section class="guest">
+                <h3 class="date">November</h3>
+                <a class="name" href="speaker2.html">Andrew Ross Sorkin</a>
+                <img class="photo" src="speaker2.jpg" alt="Andrew Ross Sorkin">
+            </section>
+            <section class="guest">
+                <h3 class="date">January</h3>
+                <a class="name" href="speaker3.html">Amy Chua</a>
+                <img class="photo" src="speaker3.jpg" alt="Amy Chua">
+            </section>
+            <section class="guest">
+                <h3 class="date">February</h3>
+                <a class="name" href="speaker4.html">Scott Sampson</a>
+                <img class="photo" src="speaker4.jpg" alt="Scott Sampson">
+            </section>
+        </aside>
+
+        <div id="main-content">
+            <article id="welcome">
+                <h3>Welcome to San Joaquin Valley Town Hall</h3>
+                <p>
+                    San Joaquin Valley Town Hall is a non-profit organization founded in 1938 by
+                    an all-volunteer board of directors. Our mission is to bring nationally and
+                    internationally renowned, thought-provoking speakers who inform, educate, and
+                    entertain our audience!
+                </p>
+                <blockquote>
+                    “Each year I give a ticket package to each of our grandkids. I think of it as
+                    the gift of knowledge... and that is priceless.”
+                </blockquote>
+            </article>
+
+            <article id="event-details">
+                <h2>Speaker of the Month</h2>
+                <div style="border-bottom: 2px solid brown; border-top: 2px solid brown;">
+                    <h3 style="color: brown;">Fossil Threads in the Web of Life</h3>
+                    <div style="display: flex; flex-direction: row; gap: 1rem;">
+                        <div style="flex: 1">
+                            <p style="margin: 0;"><strong>February</strong></p>
+                            <p><strong>Scott Sampson</strong></p>
+                            <p>What's 75 million years old and brand spanking new? A teenage Utahceratops! 
+                            Come to the Saroyan, armed with your best dinosaur roar, when Scott Sampson, 
+                            Research Curator at the Utah Museum of Natural History, steps to the podium. 
+                            Sampson's research has focused on the ecology and evolution of late Cretaceous 
+                            dinosaurs, and he has conducted fieldwork in a number of countries in Africa.
+                            </p>
+                        </div>
+                        <img src="speaker4.jpg" alt="Scott Sampson" style="width:auto; flex: 1;height:auto; object-fit:cover;">
+                    </div>
+
+                    <p>
+                        <a href="readmore.html">Read more</a> | <a href="playvideo.html">Play video</a>
+                    </p>
+                </div>
+            </article>
+
+            <article id="upcoming-events">
+                <h2 style="color: brown;">Our Ticket Packages</h2>
+                <ul>
+                    <li>Season Package: $95</li>
+                    <li>Patron Package: $200</li>
+                    <li>Single Speaker: $25</li>
+                </ul>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2022, San Joaquin Valley Town Hall, Fresno CA 93755.</p>
+    </footer>
+</body>
+</html>
