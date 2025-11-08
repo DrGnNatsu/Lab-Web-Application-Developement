@@ -113,8 +113,9 @@ while (rs.next()){
 <a href="delete-student.jsp?id=<%= id %>" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
 ```
 #### Result
-![Setup.png](Img/ResultEx1.png)
-
+![ResultEx1.png](Img/ResultEx1.png)
+![ResultEx1_Error.png](Img/ResultEx1_Error.png)
+![ResultEx1_Error2.png](Img/ResultEx1_Error2.png)
 ### Exercise 2.2
 #### How the code works?
 1. The JSP file `add-student.jsp` contains an HTML form that allows users to input student details such as Student Code, Full Name, Email, and Major.
@@ -173,7 +174,8 @@ while (rs.next()){
 7. Close the database connection and other resources.
 #### Result
 ![ResultEx2.png](Img/ResultEx2.png)
-
+![ResultEx2_Error.png](Img/ResultEx2_Error.png)
+![ResultEx2_Error2.png](Img/ResultEx2_Error2.png)
 ## Exercise 3
 ### Exercise 3.1
 #### How the code works?
