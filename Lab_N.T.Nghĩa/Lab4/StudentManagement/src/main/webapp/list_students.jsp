@@ -1,39 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*, java.nio.charset.StandardCharsets, java.text.Normalizer, java.util.*" %>
-
-<%-- Helper methods for accent-insensitive highlighting and escaping --%>
-<%!
-    public static String stripDiacritics(String s) {
-        if (s == null) return "";
-        String normalized = Normalizer.normalize(s, Normalizer.Form.NFD);
-        return normalized.replaceAll("\\p{M}", "").toLowerCase();
-    }
-    public static String escapeHtml(String s) {
-        if (s == null) return "";
-        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
-    }
-    public static String highlightMatch(String original, String keywordNorm) {
-        if (original == null || keywordNorm == null || keywordNorm.isEmpty()) return escapeHtml(original);
-        String norm = stripDiacritics(original);
-        int idx = norm.indexOf(keywordNorm);
-        if (idx == -1) return escapeHtml(original);
-        int normPos = 0;
-        int start = -1, end = -1;
-        for (int i = 0; i < original.length(); i++) {
-            char c = original.charAt(i);
-            String cNorm = stripDiacritics(String.valueOf(c));
-            normPos += cNorm.length();
-            if (start == -1 && normPos > idx) start = i;
-            if (start != -1 && normPos >= idx + keywordNorm.length()) { end = i + 1; break; }
-        }
-        if (start == -1) return escapeHtml(original);
-        if (end == -1) end = original.length();
-        String before = escapeHtml(original.substring(0, start));
-        String match = escapeHtml(original.substring(start, end));
-        String after = escapeHtml(original.substring(end));
-        return before + "<strong>" + match + "</strong>" + after;
-    }
-%>
+<%@ page import="java.sql.*, java.nio.charset.StandardCharsets" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -273,14 +239,14 @@
 
 <a href="add_student.jsp" class="btn">➕ Add New Student</a>
 
-<form id="searchForm" class="search-form" action="list_students.jsp" method="GET" onsubmit="return submitForm(this)">
+<form class="search-form" action="list_students.jsp" method="GET" onsubmit="return submitForm(this)">
     <label for="keyword" class="sr-only">Search students by name or code</label>
     <input id="keyword" class="search-input" type="text" name="keyword" placeholder="Search by name or code..." value="<%= request.getParameter("keyword") != null ? request.getParameter("keyword") : "" %>">
     <button class="search-button" type="submit">Search</button>
     <a class="clear-link" href="list_students.jsp">Clear</a>
 </form>
 
-<!-- compute keyword, pagination and sorting early so headers and links can use them -->
+<%-- compute keyword, pagination and sorting early so headers and links can use them --%>
 <%
     String keyword = request.getParameter("keyword");
     String pageParam = request.getParameter("page");
@@ -292,34 +258,30 @@
     if (order == null) order = "desc";
     order = "asc".equalsIgnoreCase(order) ? "asc" : "desc";
 
-    // Keyword helpers
+    // Keyword helpers for highlighting
     boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
     String keywordLower = hasKeyword ? keyword.toLowerCase() : "";
-    String keywordNorm = hasKeyword ? stripDiacritics(keywordLower) : "";
 
     // whitelist allowed sort columns to avoid SQL injection
-    Set<String> allowed = new HashSet<>();
+    java.util.Set<String> allowed = new java.util.HashSet<>();
     allowed.add("id"); allowed.add("student_code"); allowed.add("full_name"); allowed.add("email"); allowed.add("major"); allowed.add("created_at");
     String safeSort = allowed.contains(sortBy) ? sortBy : "id";
     String orderClause = safeSort + " " + order;
 
     // When changing sorting, show first page
-    if (request.getParameter("sort") != null) pageParam = "1";
+    if (request.getParameter("sort") != null) {
+        pageParam = "1";
+    }
 
     int currentPage = (pageParam != null && pageParam.matches("\\d+")) ? Integer.parseInt(pageParam) : 1;
     int recordsPerPage = 10;
     int offset; // computed after counting totalRecords
 %>
 
-<!-- Bulk actions form: posts selected IDs to delete_selected.jsp -->
-<form id="bulkForm" action="delete_selected.jsp" method="POST" onsubmit="return confirmBulkDelete();">
-    <button id="deleteSelectedBtn" type="submit" style="background:#dc3545; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; margin-bottom:12px;" disabled>🗑️ Delete Selected</button>
-
 <div class="table-container table-responsive">
 <table>
     <thead>
     <tr>
-        <th><input id="selectAll" type="checkbox" aria-label="Select all students"></th>
         <th>ID</th>
         <th>Student Code</th>
         <th>
@@ -391,20 +353,22 @@
             // --- query current page ---
             String sql;
             if (keyword == null || keyword.trim().isEmpty()) {
-                // safe: orderClause constructed from whitelisted column + asc/desc
-                sql = "SELECT * FROM students ORDER BY " + orderClause + " LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students ORDER BY ? LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1, recordsPerPage);
-                pstmt.setInt(2, offset);
+                pstmt.setString(1, orderClause);
+                pstmt.setInt(2, recordsPerPage);
+                pstmt.setInt(3, offset);
+
             } else {
-                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY " + orderClause + " LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY ? LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
                 String searchPattern = "%" + keyword + "%";
                 pstmt.setString(1, searchPattern);
                 pstmt.setString(2, searchPattern);
                 pstmt.setString(3, searchPattern);
-                pstmt.setInt(4, recordsPerPage);
-                pstmt.setInt(5, offset);
+                pstmt.setString(4, orderClause);
+                pstmt.setInt(5, recordsPerPage);
+                pstmt.setInt(6, offset);
             }
 
             rs = pstmt.executeQuery();
@@ -419,45 +383,74 @@
                 Timestamp createdAt = rs.getTimestamp("created_at");
     %>
     <tr>
-        <td><input class="rowCheckbox" type="checkbox" name="ids" value="<%= id %>" aria-label="Select student <%= id %>"></td>
         <td><%= id %></td>
-        <td><%= hasKeyword ? highlightMatch(studentCode, keywordNorm) : escapeHtml(studentCode) %></td>
-        <td><%= hasKeyword ? highlightMatch(fullName, keywordNorm) : escapeHtml(fullName) %></td>
-        <td><%= email != null ? escapeHtml(email) : "N/A" %></td>
-        <td><%= hasKeyword ? highlightMatch(major, keywordNorm) : escapeHtml(major) %></td>
-        <td><%= createdAt %></td>
-        <td>
-            <a href="edit_student.jsp?id=<%= id %>" class="action-link">✏️ Edit</a>
-            <br>
-            <a href="delete_student.jsp?id=<%= id %>" class="action-link delete-link" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-        </td>
-    </tr>
+        <%
+            if (hasKeyword && studentCode != null && studentCode.toLowerCase().contains(keywordLower)) {
+        %>
+        <td style="font-weight: bold;"><%= studentCode %></td>
+        <%
+            } else {
+        %>
+        <td><%= studentCode %></td>
+        <%
+            }
+        %>
+        <%
+            if (hasKeyword && fullName != null && fullName.toLowerCase().contains(keywordLower)) {
+        %>
+        <td style="font-weight: bold;"><%= fullName %></td>
+        <%
+            } else {
+        %>
+        <td><%= fullName %></td>
+        <%
+            }
+        %>
+        <td><%= email != null ? email : "N/A" %></td>
+        <%
+            if (hasKeyword && major != null && major.toLowerCase().contains(keywordLower)) {
+        %>
+        <td style="font-weight: bold;"><%= major %></td>
+        <%
+            } else {
+        %>
+        <td><%= major != null ? major : "N/A" %></td>
+        <%
+            }
+        %>
+         <td><%= createdAt %></td>
+         <td>
+             <a href="edit_student.jsp?id=<%= id %>" class="action-link">✏️ Edit</a>
+             <br>
+             <a href="delete_student.jsp?id=<%= id %>"
+                class="action-link delete-link"
+                onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+         </td>
+     </tr>
     <%
             }
         } catch (ClassNotFoundException e) {
-             hadError = true;
-             errorRow = "<tr><td colspan='7'>Error: JDBC Driver not found!</td></tr>";
-         } catch (SQLException e) {
-             hadError = true;
-             errorRow = "<tr><td colspan='7'>Database Error: " + e.getMessage() + "</td></tr>";
-         } finally {
-             try {
-                 if (rs != null) rs.close();
-                 if (pstmt != null) pstmt.close();
-                 if (conn != null) conn.close();
-             } catch (SQLException e) {
-                 // ignore close exceptions in this simple example
-             }
-         }
-     %>
+            hadError = true;
+            errorRow = "<tr><td colspan='7'>Error: JDBC Driver not found!</td></tr>";
+        } catch (SQLException e) {
+            hadError = true;
+            errorRow = "<tr><td colspan='7'>Database Error: " + e.getMessage() + "</td></tr>";
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                // ignore close exceptions in this simple example
+            }
+        }
+    %>
     <% if (hadError) { %>
         <%= errorRow %>
     <% } %>
     </tbody>
 </table>
 </div>
-</form>
-
 <div class="pagination">
     <% if (currentPage > 1) { %>
     <a href="list_students.jsp?page=<%= currentPage - 1 %><%= keyword != null ? "&keyword=" + java.net.URLEncoder.encode(keyword, StandardCharsets.UTF_8) : "" %><%= "&sort=" + safeSort + "&order=" + order %>">Previous</a>
@@ -475,39 +468,6 @@
     <a href="list_students.jsp?page=<%= currentPage + 1 %><%= keyword != null ? "&keyword=" + java.net.URLEncoder.encode(keyword, StandardCharsets.UTF_8) : "" %><%= "&sort=" + safeSort + "&order=" + order %>">Next</a>
     <% } %>
 </div>
-
-<!-- Bulk-selection JS: enable/disable delete button, select all behavior, confirmation -->
-<script>
-    (function() {
-        var selectAll = document.getElementById('selectAll');
-        var deleteBtn = document.getElementById('deleteSelectedBtn');
-        function updateDeleteBtn() {
-            var any = document.querySelectorAll('.rowCheckbox:checked').length > 0;
-            deleteBtn.disabled = !any;
-        }
-        if (selectAll) {
-            selectAll.addEventListener('change', function() {
-                var checked = selectAll.checked;
-                document.querySelectorAll('.rowCheckbox').forEach(function(cb) { cb.checked = checked; });
-                updateDeleteBtn();
-            });
-        }
-        document.addEventListener('change', function(e) {
-            if (e.target && e.target.classList && e.target.classList.contains('rowCheckbox')) {
-                var all = document.querySelectorAll('.rowCheckbox').length;
-                var checked = document.querySelectorAll('.rowCheckbox:checked').length;
-                if (selectAll) selectAll.checked = (all === checked && all > 0);
-                updateDeleteBtn();
-            }
-        });
-        window.confirmBulkDelete = function() {
-            var checked = document.querySelectorAll('.rowCheckbox:checked').length;
-            if (!checked) return false;
-            return confirm('Are you sure you want to delete ' + checked + ' selected student(s)?');
-        }
-    })();
-</script>
-
 <!-- JS: auto-hide messages and prevent double submit (loading state) -->
 <script>
     // Auto-hide messages after 3 seconds
