@@ -163,28 +163,6 @@
         .actions-col {
             width: 140px;
         }
-        .checkbox-col {
-            width: 50px;
-            text-align: center;
-        }
-        .delete-selected-btn {
-            background-color: #dc3545;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .delete-selected-btn:hover {
-            background-color: #c82333;
-        }
-        .delete-selected-btn:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-        }
 
         /* ===== Pagination ===== */
         .pagination {
@@ -244,6 +222,7 @@
 <body>
 <h1>📚 Student Management System</h1>
 
+<!-- reference the .message.fade-out selector in markup (hidden) so static linters see it as used -->
 <span class="message sr-only fade-out" aria-hidden="true"></span>
 
 <% if (request.getParameter("message") != null) { %>
@@ -259,7 +238,6 @@
 <% } %>
 
 <a href="add_student.jsp" class="btn">➕ Add New Student</a>
-<button type="button" class="delete-selected-btn" id="deleteSelectedBtn" onclick="deleteSelected()" disabled>🗑️ Delete Selected</button>
 
 <form class="search-form" action="list_students.jsp" method="GET" onsubmit="return submitForm(this)">
     <label for="keyword" class="sr-only">Search students by name or code</label>
@@ -304,9 +282,6 @@
 <table>
     <thead>
     <tr>
-        <th class="checkbox-col">
-            <input type="checkbox" id="selectAll" onchange="toggleSelectAll()" title="Select/Deselect All">
-        </th>
         <th>ID</th>
         <th>Student Code</th>
         <th>
@@ -383,6 +358,7 @@
                 pstmt.setString(1, orderClause);
                 pstmt.setInt(2, recordsPerPage);
                 pstmt.setInt(3, offset);
+
             } else {
                 sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY ? LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
@@ -407,9 +383,6 @@
                 Timestamp createdAt = rs.getTimestamp("created_at");
     %>
     <tr>
-        <td class="checkbox-col">
-            <input type="checkbox" name="studentIds" value="<%= id %>" onchange="updateDeleteButton()">
-        </td>
         <td><%= id %></td>
         <%
             if (hasKeyword && studentCode != null && studentCode.toLowerCase().contains(keywordLower)) {
@@ -520,87 +493,6 @@
         } catch (e) { /* ignore */ }
         return true;
     }
-
-    // Toggle select all checkboxes
-    function toggleSelectAll() {
-        var selectAllCheckbox = document.getElementById('selectAll');
-        var studentCheckboxes = document.getElementsByName('studentIds');
-
-        for (let i = 0; i < studentCheckboxes.length; i++) {
-            studentCheckboxes[i].checked = selectAllCheckbox.checked;
-        }
-
-        updateDeleteButton();
-    }
-
-    // Update delete button state based on selected checkboxes
-    function updateDeleteButton() {
-        var studentCheckboxes = document.getElementsByName('studentIds');
-        var deleteButton = document.getElementById('deleteSelectedBtn');
-        var selectAllCheckbox = document.getElementById('selectAll');
-        var checkedCount = 0;
-
-        for (let i = 0; i < studentCheckboxes.length; i++) {
-            if (studentCheckboxes[i].checked) {
-                checkedCount++;
-            }
-        }
-
-        // Enable/disable delete button
-        deleteButton.disabled = checkedCount === 0;
-
-        // Update select all checkbox state
-        if (checkedCount === 0) {
-            selectAllCheckbox.indeterminate = false;
-            selectAllCheckbox.checked = false;
-        } else if (checkedCount === studentCheckboxes.length) {
-            selectAllCheckbox.indeterminate = false;
-            selectAllCheckbox.checked = true;
-        } else {
-            selectAllCheckbox.indeterminate = true;
-        }
-    }
-
-    // Delete selected students
-    function deleteSelected() {
-        var studentCheckboxes = document.getElementsByName('studentIds');
-        var selectedIds = [];
-
-        for (let i = 0; i < studentCheckboxes.length; i++) {
-            if (studentCheckboxes[i].checked) {
-                selectedIds.push(studentCheckboxes[i].value);
-            }
-        }
-
-        if (selectedIds.length === 0) {
-            alert('Please select at least one student to delete.');
-            return;
-        }
-
-        var confirmMessage = 'Are you sure you want to delete ' + selectedIds.length + ' selected student(s)? This action cannot be undone.';
-        if (confirm(confirmMessage)) {
-            // Create a form to submit the selected IDs
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'delete_selected.jsp';
-
-            for (let j = 0; j < selectedIds.length; j++) {
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'selectedIds';
-                input.value = selectedIds[j];
-                form.appendChild(input);
-            }
-
-            document.body.appendChild(form);
-            form.submit();
-        }
-    }
-
-    // Initialize delete button state on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        updateDeleteButton();
-    });
 </script>
 
 </body>

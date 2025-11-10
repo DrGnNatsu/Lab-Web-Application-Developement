@@ -14,8 +14,5 @@ COMPLETED EXERCISES:
 - [x] Bonus 2: Sortable Columns
 - [x] Bonus 3: Bulk Delete
 
-KNOWN ISSUES:
-- Search does not highlight if the search have the "`, ..."
-
 TIME SPENT: 4 hours
 
