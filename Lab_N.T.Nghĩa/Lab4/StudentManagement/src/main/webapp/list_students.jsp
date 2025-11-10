@@ -1,15 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*, java.nio.charset.StandardCharsets, java.text.Normalizer" %>
-
-<%-- Helper methods for accent-insensitive highlighting --%>
-<%!
-    // Remove diacritics and lowercase
-    public static String stripDiacritics(String s) {
-        if (s == null) return "";
-        String normalized = Normalizer.normalize(s, Normalizer.Form.NFD);
-        return normalized.replaceAll("\\p{M}", "").toLowerCase();
-    }
-
+<%@ page import="java.sql.*, java.nio.charset.StandardCharsets" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -268,14 +258,9 @@
     if (order == null) order = "desc";
     order = "asc".equalsIgnoreCase(order) ? "asc" : "desc";
 
-    // Keyword helpers for highlighting (strip diacritics for accent-insensitive compare)
+    // Keyword helpers for highlighting
     boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
     String keywordLower = hasKeyword ? keyword.toLowerCase() : "";
-    String keywordNorm = "";
-    if (hasKeyword) {
-        // remove diacritics and lowercase once
-        keywordNorm = Normalizer.normalize(keywordLower, Normalizer.Form.NFD).replaceAll("\\p{M}", "").toLowerCase();
-    }
 
     // whitelist allowed sort columns to avoid SQL injection
     java.util.Set<String> allowed = new java.util.HashSet<>();
@@ -368,21 +353,22 @@
             // --- query current page ---
             String sql;
             if (keyword == null || keyword.trim().isEmpty()) {
-                // safe: orderClause is built only from whitelisted column + 'asc'/'desc'
-                sql = "SELECT * FROM students ORDER BY " + orderClause + " LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students ORDER BY ? LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1, recordsPerPage);
-                pstmt.setInt(2, offset);
+                pstmt.setString(1, orderClause);
+                pstmt.setInt(2, recordsPerPage);
+                pstmt.setInt(3, offset);
+
             } else {
-                // safe: orderClause is sanitized above
-                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY " + orderClause + " LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY ? LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
                 String searchPattern = "%" + keyword + "%";
                 pstmt.setString(1, searchPattern);
                 pstmt.setString(2, searchPattern);
                 pstmt.setString(3, searchPattern);
-                pstmt.setInt(4, recordsPerPage);
-                pstmt.setInt(5, offset);
+                pstmt.setString(4, orderClause);
+                pstmt.setInt(5, recordsPerPage);
+                pstmt.setInt(6, offset);
             }
 
             rs = pstmt.executeQuery();
@@ -395,15 +381,11 @@
                 String email = rs.getString("email");
                 String major = rs.getString("major");
                 Timestamp createdAt = rs.getTimestamp("created_at");
-                // normalized (diacritics-stripped) versions for accent-insensitive matching
-                String studentCodeNorm = studentCode != null ? Normalizer.normalize(studentCode.toLowerCase(), Normalizer.Form.NFD).replaceAll("\\p{M}", "") : "";
-                String fullNameNorm = fullName != null ? Normalizer.normalize(fullName.toLowerCase(), Normalizer.Form.NFD).replaceAll("\\p{M}", "") : "";
-                String majorNorm = major != null ? Normalizer.normalize(major.toLowerCase(), Normalizer.Form.NFD).replaceAll("\\p{M}", "") : "";
     %>
     <tr>
         <td><%= id %></td>
         <%
-            if (hasKeyword && studentCode != null && studentCodeNorm.contains(keywordNorm)) {
+            if (hasKeyword && studentCode != null && studentCode.toLowerCase().contains(keywordLower)) {
         %>
         <td style="font-weight: bold;"><%= studentCode %></td>
         <%
@@ -414,7 +396,7 @@
             }
         %>
         <%
-            if (hasKeyword && fullName != null && fullNameNorm.contains(keywordNorm)) {
+            if (hasKeyword && fullName != null && fullName.toLowerCase().contains(keywordLower)) {
         %>
         <td style="font-weight: bold;"><%= fullName %></td>
         <%
@@ -426,7 +408,7 @@
         %>
         <td><%= email != null ? email : "N/A" %></td>
         <%
-            if (hasKeyword && major != null && majorNorm.contains(keywordNorm)) {
+            if (hasKeyword && major != null && major.toLowerCase().contains(keywordLower)) {
         %>
         <td style="font-weight: bold;"><%= major %></td>
         <%
