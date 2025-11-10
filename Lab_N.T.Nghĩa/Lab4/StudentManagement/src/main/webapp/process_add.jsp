@@ -13,9 +13,31 @@
     String email = request.getParameter("email");
     String major = request.getParameter("major");
 
-    if (studentCode == null || studentCode.trim().isEmpty() ||
-            fullName == null || fullName.trim().isEmpty()) {
+    // Trim inputs to avoid validation issues due to whitespace
+    if (studentCode != null) studentCode = studentCode.trim();
+    if (fullName != null) fullName = fullName.trim();
+    if (email != null) email = email.trim();
+    if (major != null) major = major.trim();
+
+    if (studentCode == null || studentCode.isEmpty() ||
+            fullName == null || fullName.isEmpty()) {
         response.sendRedirect("add_student.jsp?error=Required fields are missing");
+        return;
+    }
+
+    // Validate email only if provided
+    String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+    if (email != null && !email.isEmpty()) {
+        if (!email.matches(emailRegex)) {
+            // Invalid email format
+            response.sendRedirect("add_student.jsp?error=Invalid email format");
+            return;
+        }
+    }
+
+    if (!studentCode.matches("^[A-Z]{2}[0-9]{3,}")) {
+        // Invalid student code format
+        response.sendRedirect("add_student.jsp?error=Invalid student code format");
         return;
     }
 

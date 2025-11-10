@@ -18,6 +18,22 @@
         return;
     }
 
+    if (email != null && !email.isEmpty()) {
+        if (!email.matches("^[A-Z]{2}[0-9]{3,}")) {
+            // Invalid email format
+            response.sendRedirect("edit_student.jsp?error=Invalid email format");
+            return;
+        }
+    }
+
+    if (!idParam.isEmpty()) {
+        if (!idParam.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            // Invalid email format
+            response.sendRedirect("edit_student.jsp?error=Invalid email format");
+            return;
+        }
+    }
+
     int studentId = Integer.parseInt(idParam);
 
     Connection conn = null;
