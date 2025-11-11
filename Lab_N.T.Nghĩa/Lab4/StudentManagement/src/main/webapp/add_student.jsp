@@ -99,7 +99,8 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email"
-                   placeholder="student@email.com">
+                   placeholder="student@email.com"
+                   pattern="^[A-Za-z0-9+_.-]+@(.+)$">
         </div>
 
         <div class="form-group">

@@ -268,14 +268,14 @@
     String safeSort = allowed.contains(sortBy) ? sortBy : "id";
     String orderClause = safeSort + " " + order;
 
-    // When changing sorting, show first page
-    if (request.getParameter("sort") != null) {
+    // If sort is changed and page is not specified, reset to page 1
+    if (request.getParameter("sort") != null && request.getParameter("page") == null) {
         pageParam = "1";
     }
 
     int currentPage = (pageParam != null && pageParam.matches("\\d+")) ? Integer.parseInt(pageParam) : 1;
     int recordsPerPage = 10;
-    int offset; // computed after counting totalRecords
+    int offset;
 %>
 
 <div class="table-container table-responsive">
@@ -306,7 +306,6 @@
     </tr>
     </thead>
     <tbody>
-    <%-- variables (keyword, currentPage, safeSort, order, orderClause) were computed above --%>
     <%
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -325,7 +324,6 @@
                     "apppass"
             );
 
-            // --- count total matching records ---
             String countSql;
             if (keyword == null || keyword.trim().isEmpty()) {
                 countSql = "SELECT COUNT(*) FROM students";
@@ -344,31 +342,27 @@
             countRs.close();
             pstmt.close();
 
-            // compute pagination
             totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
             if (totalPages < 1) totalPages = 1;
             if (currentPage > totalPages) currentPage = totalPages;
-            offset = (currentPage - 1) * recordsPerPage; // recalc in case currentPage changed
+            offset = (currentPage - 1) * recordsPerPage;
 
-            // --- query current page ---
             String sql;
             if (keyword == null || keyword.trim().isEmpty()) {
-                sql = "SELECT * FROM students ORDER BY ? LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students ORDER BY "+ orderClause + " LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, orderClause);
-                pstmt.setInt(2, recordsPerPage);
-                pstmt.setInt(3, offset);
+                pstmt.setInt(1, recordsPerPage);
+                pstmt.setInt(2, offset);
 
             } else {
-                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY ? LIMIT ? OFFSET ?";
+                sql = "SELECT * FROM students WHERE full_name LIKE ? OR student_code LIKE ? OR major LIKE ? ORDER BY " + orderClause +" LIMIT ? OFFSET ?";
                 pstmt = conn.prepareStatement(sql);
                 String searchPattern = "%" + keyword + "%";
                 pstmt.setString(1, searchPattern);
                 pstmt.setString(2, searchPattern);
                 pstmt.setString(3, searchPattern);
-                pstmt.setString(4, orderClause);
-                pstmt.setInt(5, recordsPerPage);
-                pstmt.setInt(6, offset);
+                pstmt.setInt(4, recordsPerPage);
+                pstmt.setInt(5, offset);
             }
 
             rs = pstmt.executeQuery();
@@ -468,25 +462,21 @@
     <a href="list_students.jsp?page=<%= currentPage + 1 %><%= keyword != null ? "&keyword=" + java.net.URLEncoder.encode(keyword, StandardCharsets.UTF_8) : "" %><%= "&sort=" + safeSort + "&order=" + order %>">Next</a>
     <% } %>
 </div>
-<!-- JS: auto-hide messages and prevent double submit (loading state) -->
 <script>
-    // Auto-hide messages after 3 seconds
     setTimeout(function() {
-        var messages = document.querySelectorAll('.message');
+        const messages = document.querySelectorAll('.message');
         messages.forEach(function(msg) {
-            // add fade then remove after transition
             msg.classList.add('fade-out');
             setTimeout(function() { try { msg.style.display = 'none'; } catch(e) {} }, 300);
         });
     }, 3000);
 
-    // Disable submit button and show processing text
     function submitForm(form) {
         try {
             var btn = form.querySelector('button[type="submit"]');
             if (btn) {
                 btn.disabled = true;
-                // preserve width by setting minWidth
+
                 btn.dataset.origText = btn.textContent;
                 btn.textContent = 'Processing...';
             }

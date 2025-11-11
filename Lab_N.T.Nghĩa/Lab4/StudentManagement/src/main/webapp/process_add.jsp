@@ -26,10 +26,13 @@
     }
 
     // Validate email only if provided
-    String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+    // Require a more strict email format: local@domain.tld (simple, not fully RFC-complete)
+    // - local part: letters, digits and . _ + -
+    // - domain: letters/digits/dots/hyphens and must contain at least one dot with a 2+ letter TLD
+    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     if (email != null && !email.isEmpty()) {
         if (!email.matches(emailRegex)) {
-            // Invalid email format
+            // Invalid email format (require domain with TLD like example.com)
             response.sendRedirect("add_student.jsp?error=Invalid email format");
             return;
         }
