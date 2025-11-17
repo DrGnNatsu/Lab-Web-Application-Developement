@@ -11,5 +11,11 @@ public class Main {
             System.out.println(s);
         }
 
+        List<Student> results = dao.searchStudents("SV");
+        System.out.println("Found " + results.size() + " students");
+        for (Student s : results) {
+            System.out.println(s);
+        }
+
     }
 }
