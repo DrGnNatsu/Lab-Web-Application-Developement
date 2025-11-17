@@ -347,6 +347,15 @@
         </form>
     </div>
 
+    <div class="export-box">
+        <form id="exportForm" action="${pageContext.request.contextPath}/export" method="get" style="display:inline;">
+            <input type="hidden" name="keyword" value="${param.keyword}" />
+            <input type="hidden" name="major" value="${param.major}" />
+            <input type="hidden" name="sortBy" value="${param.sortBy}" />
+            <input type="hidden" name="order" value="${param.order}" />
+            <button type="submit" class="btn">Export to Excel</button>
+        </form>
+    </div>
 
     <!-- Student Table -->
     <c:choose>
@@ -387,8 +396,6 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-
-
                 <tbody>
                 <c:forEach var="student" items="${students}">
                     <tr>
