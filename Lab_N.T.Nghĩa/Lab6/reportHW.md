@@ -144,7 +144,7 @@ public List<Student> searchStudents(String keyword) {
 ```
 ### Screenshot
 ![Ex53_1.png](image/Ex53_1.png)
-
+![Ex53_1.png](../Lab5/student-management-mvc/image/Ex53_1.png)
 # EXERCISE 6: SERVER-SIDE VALIDATION (12 points)
 ## 6.1: Create Validation Method (5 points)
 ### How does it work ?
