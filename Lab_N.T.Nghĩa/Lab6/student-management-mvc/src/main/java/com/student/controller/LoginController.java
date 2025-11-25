@@ -47,8 +47,8 @@ public class LoginController extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String rememberMe = request.getParameter("remember");
-
+        String rememberMe = request.getParameter("rememberMe");
+        System.out.println("Remember Me: " + rememberMe);
         // Validate input
         if (username == null || username.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()) {

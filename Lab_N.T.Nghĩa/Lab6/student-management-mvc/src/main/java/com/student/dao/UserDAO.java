@@ -201,6 +201,7 @@ public class UserDAO {
             pstmt.setInt(1, userId);
             pstmt.setString(2, token);
             pstmt.executeUpdate();
+            System.out.println("Remember token saved for user ID: " + userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

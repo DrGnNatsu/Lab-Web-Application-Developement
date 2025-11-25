@@ -354,8 +354,7 @@ public class ChangePasswordController extends HttpServlet {
         }
 
         String storedHash = sessionUser.getPassword();
-
-        // FIX: Use BCrypt.checkpw() to verify password
+        
         if (!BCrypt.checkpw(currentPassword, storedHash)) {
             request.setAttribute("error", "Current password is incorrect.");
             request.getRequestDispatcher("/views/change-password.jsp").forward(request, response);
@@ -390,3 +389,13 @@ public class ChangePasswordController extends HttpServlet {
 #### Testing:
 - Already change the jane password from password123 to newpassword123
 
+## BONUS 2: Remember Me Functionality (5 points)
+### Implementation
+1. Added a "Remember Me" checkbox to the login form in `login.jsp`.
+2. In `LoginController.java`, if "Remember Me" is checked, create a persistent cookie with a secure token.
+3. Store the token in the database associated with the user.
+4. On subsequent visits, check for the cookie and automatically log in the user if the token is valid.
+5. If logout is performed, delete the cookie and invalidate the token in the database.
+### Results
+Save the token
+![Bonus3_1_1.png](student-management-mvc/image/Bonus3_1_1.png)
