@@ -379,7 +379,7 @@
 
     <!-- Error Message -->
     <c:if test="${not empty param.error}">
-        <div class="message error">
+        <div class="message error alert alert-error">
             ❌ ${param.error}
         </div>
     </c:if>

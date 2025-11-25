@@ -172,6 +172,8 @@ public class UserDAO {
         return user;
     }
 
+
+
     /**
      * Test method - Generate hashed password
      */
