@@ -186,9 +186,12 @@
                    required>
         </div>
 
-        <div class="remember-me">
-            <input type="checkbox" id="remember" name="remember">
-            <label for="remember">Remember me</label>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input"
+                   id="rememberMe" name="rememberMe" value="on">
+            <label class="form-check-label" for="rememberMe">
+                <i class="bi bi-clock-history"></i> Remember me for 30 days
+            </label>
         </div>
 
         <button type="submit" class="btn-login">Login</button>

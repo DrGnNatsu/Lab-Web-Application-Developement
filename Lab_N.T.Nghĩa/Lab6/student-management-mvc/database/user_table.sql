@@ -18,3 +18,14 @@ INSERT INTO users (username, password, full_name, role) VALUES
                                                             ('admin', '$2a$10$yWVO7QzwBqDNTDq6f4YwLu63bGs2/JOPV8ei2nnn3SBIPKTivtDIy', 'Admin User', 'admin'),
                                                             ('john', '$2a$10$yWVO7QzwBqDNTDq6f4YwLu63bGs2/JOPV8ei2nnn3SBIPKTivtDIy', 'John Doe', 'user'),
                                                             ('jane', '$2a$10$yWVO7QzwBqDNTDq6f4YwLu63bGs2/JOPV8ei2nnn3SBIPKTivtDIy', 'Jane Smith', 'user');
+
+CREATE TABLE remember_tokens (
+                                 id INT PRIMARY KEY AUTO_INCREMENT,
+                                 user_id INT NOT NULL,
+                                 token VARCHAR(255) NOT NULL UNIQUE,
+                                 expires_at TIMESTAMP NOT NULL,
+                                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                                 INDEX idx_token (token),
+                                 INDEX idx_expires (expires_at)
+);

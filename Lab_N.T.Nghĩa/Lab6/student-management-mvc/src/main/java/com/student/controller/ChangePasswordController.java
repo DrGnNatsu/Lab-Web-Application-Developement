@@ -88,6 +88,4 @@ public class ChangePasswordController extends HttpServlet {
             request.getRequestDispatcher("/views/change-password.jsp").forward(request, response);
         }
     }
-
-
 }

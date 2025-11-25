@@ -5,11 +5,10 @@ import com.student.model.User;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
+
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -82,7 +81,19 @@ public class LoginController extends HttpServlet {
 
             // Handle "Remember Me" (optional - cookie implementation)
             if ("on".equals(rememberMe)) {
-                // TODO: Implement remember me functionality with cookie
+                // 1. Generate secure random token
+                String token = UUID.randomUUID().toString();
+
+                // 2. Save token to database (expires in 30 days)
+                userDAO.saveRememberToken(user.getId(), token);
+
+                // 3. Create secure cookie
+                Cookie rememberCookie = new Cookie("remember_token", token);
+                rememberCookie.setMaxAge(30 * 24 * 60 * 60); // 30 days in seconds
+                rememberCookie.setPath("/");
+                rememberCookie.setHttpOnly(true); // Prevent JavaScript access (XSS protection)
+                // rememberCookie.setSecure(true); // Enable in production with HTTPS
+                response.addCookie(rememberCookie);
             }
 
             // Redirect based on role
