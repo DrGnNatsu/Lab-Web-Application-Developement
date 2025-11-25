@@ -361,6 +361,8 @@
                 ${sessionScope.role}
             </span>
         </div>
+
+        <a href="change-password" class="btn-nav">← Change password</a>
         <a href="dashboard" class="btn-nav">Dashboard</a>
         <a href="logout" class="btn-logout">Logout</a>
     </div>

@@ -172,6 +172,23 @@ public class UserDAO {
         return user;
     }
 
+    public boolean updatePassword(int userId, String newHashedPassword) {
+        String SQL_UPDATE_PASSWORD = "UPDATE users SET password = ? WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQL_UPDATE_PASSWORD)) {
+
+            pstmt.setString(1, newHashedPassword);
+            pstmt.setInt(2, userId);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
     /**

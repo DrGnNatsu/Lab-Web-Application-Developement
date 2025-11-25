@@ -148,6 +148,27 @@
             margin: 5px 0;
             color: #666;
         }
+
+        .btn-back {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            text-align: center;
+            background: #f8f9fa;
+            color: #667eea;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
     </style>
 </head>
 <body>
@@ -200,6 +221,7 @@
         </div>
 
         <button type="submit" class="btn-login">Change Password</button>
+        <a href="${pageContext.request.contextPath}/dashboard" class="btn-back">← Back to Dashboard</a>
     </form>
 
     <div class="demo-credentials">
