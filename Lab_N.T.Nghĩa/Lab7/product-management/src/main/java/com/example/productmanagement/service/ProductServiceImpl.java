@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +32,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product saveProduct(Product product) {
+    public void saveProduct(Product product) {
         // Validation logic can go here
-        return productRepository.save(product);
+        productRepository.save(product);
     }
 
     @Override
@@ -49,5 +50,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductsByCategory(String category) {
         return productRepository.findByCategory(category);
+    }
+
+    @Override
+    public List<Product> advancedSearch(String keyword, String category, BigDecimal minPrice, BigDecimal maxPrice) {
+        return productRepository.searchProducts(keyword, category, minPrice, maxPrice);
+    }
+
+    @Override
+    public List<String> findAllCategories() {
+        return productRepository.findAllCategories();
     }
 }

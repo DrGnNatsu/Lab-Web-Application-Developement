@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -26,6 +27,7 @@ public class ProductController {
     public String listProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
+        model.addAttribute("categories", productService.findAllCategories());
         return "product-list";  // Returns product-list.html
     }
 
@@ -82,6 +84,26 @@ public class ProductController {
         List<Product> products = productService.searchProducts(keyword);
         model.addAttribute("products", products);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("categories", productService.findAllCategories());
         return "product-list";
     }
+
+    @GetMapping("/advanced-search")
+    public String advancedSearch(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            Model model) {
+
+        List<Product> products = productService.advancedSearch(keyword, category, minPrice, maxPrice);
+        model.addAttribute("products", products);
+        model.addAttribute("categories", productService.findAllCategories());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category", category);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        return "product-list";
+    }
+
 }
