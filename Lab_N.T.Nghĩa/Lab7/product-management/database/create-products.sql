@@ -19,9 +19,8 @@ VALUES ('P001', 'Laptop Dell XPS 13', 1299.99, 10, 'Electronics', 'High-performa
        ('P002', 'iPhone 15 Pro', 999.99, 25, 'Electronics', 'Latest iPhone with A17 Pro chip'),
        ('P003', 'Samsung Galaxy S24', 899.99, 20, 'Electronics', 'Flagship Android smartphone'),
        ('P004', 'Office Chair Ergonomic', 199.99, 50, 'Furniture', 'Comfortable office chair with lumbar support'),
-       ('P005', 'Standing Desk', 399.99, 15, 'Furniture', 'Adjustable height standing desk');
-INSERT INTO products (product_code, name, price, quantity, category, description)
-VALUES ('P010', 'Wireless Mouse Logitech MX Master 3', 99.99, 35, 'Electronics',
+       ('P005', 'Standing Desk', 399.99, 15, 'Furniture', 'Adjustable height standing desk'),
+       ('P010', 'Wireless Mouse Logitech MX Master 3', 99.99, 35, 'Electronics',
         'Ergonomic wireless mouse with MX wheel'),
        ('P011', 'Mechanical Keyboard Keychron K2', 89.99, 40, 'Electronics',
         'Compact mechanical keyboard with hot-swappable keys'),
@@ -44,5 +43,7 @@ VALUES ('P010', 'Wireless Mouse Logitech MX Master 3', 99.99, 35, 'Electronics',
        ('P027', 'Fitness Tracker Band', 49.99, 110, 'Sports', 'Activity tracker with sleep monitoring'),
        ('P028', 'Tennis Racket Pro', 89.99, 30, 'Sports', 'Lightweight graphite tennis racket'),
        ('P029', 'Camping Tent 4-Person', 149.99, 12, 'Outdoors', 'Waterproof 4-person dome tent with ventilation'),
-       ('P030', 'Yoga Mat Pro', 29.99, 150, 'Sports', 'Non-slip yoga mat with extra cushioning');
+       ('P030', 'Yoga Mat Pro', 29.99, 150, 'Sports', 'Non-slip yoga mat with extra cushioning'),
+       ('P040', 'Wireless Mouse Logitech MX Master 2', 99.99, 35, 'Electronics',
+        'Ergonomic wireless mouse with MX wheel');
 

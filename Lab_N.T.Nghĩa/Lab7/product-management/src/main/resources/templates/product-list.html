@@ -201,6 +201,28 @@
             opacity: 0.6;
             pointer-events: none;
         }
+
+        .category-filters {
+            margin: 20px 0;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .category-filters label {
+            font-weight: 600;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .btn-primary.active {
+            background-color: #4a56b8;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -227,6 +249,20 @@
         </form>
     </div>
 
+    <!-- Category Filter Buttons -->
+    <div class="category-filters">
+        <label>Filter by Category:</label>
+        <a th:href="@{/products(sortBy=${sortBy},sortDir=${sortDir})}"
+           th:classappend="${selectedCategory == null || selectedCategory == ''} ? 'active' : ''"
+           class="btn btn-sm btn-primary">All</a>
+        <a th:each="cat : ${categories}"
+           th:text="${cat}"
+           th:href="@{/products(category=${cat},sortBy=${sortBy},sortDir=${sortDir})}"
+           th:classappend="${selectedCategory == cat} ? 'active' : ''"
+           class="btn btn-sm btn-primary"></a>
+    </div>
+
+
     <form th:action="@{/products/advanced-search}" method="get" class="search-form advanced-search-form"
           onchange="this.form.submit()">
         <div class="grid">
@@ -237,7 +273,7 @@
 
             <div>
                 <label>Category</label>
-                <select name="category" onchange="this.form.submit()">
+                <select name="category">
                     <option value="">All Categories</option>
                     <option th:each="cat : ${categories}"
                             th:value="${cat}"
@@ -268,12 +304,43 @@
         <table>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Category</th>
+                <th>
+                    <a th:href="@{/products(sortBy='id',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        ID
+                        <span th:if="${sortBy=='id'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/products(sortBy='productCode',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        Product Code
+                        <span th:if="${sortBy=='productCode'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/products(sortBy='name',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        Name
+                        <span th:if="${sortBy=='name'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/products(sortBy='price',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        Price
+                        <span th:if="${sortBy=='price'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/products(sortBy='quantity',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        Quantity
+                        <span th:if="${sortBy=='quantity'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+                <th>
+                    <a th:href="@{/products(sortBy='category',sortDir=${sortDir=='asc'?'desc':'asc'},category=${selectedCategory})}">
+                        Category
+                        <span th:if="${sortBy=='category'}" th:text="${sortDir=='asc'?'↑':'↓'}"></span>
+                    </a>
+                </th>
+
                 <th>Actions</th>
             </tr>
             </thead>
@@ -299,15 +366,18 @@
             </tbody>
         </table>
 
-        <div class="pagination" th:if="${searchType == 'search' and totalPages > 1}">
+        <div class="pagination" th:if="${totalPages > 1}">
             <!-- Prev -->
             <span th:if="${currentPage <= 0}" class="disabled">« Prev</span>
             <a th:if="${currentPage > 0}"
-               th:href="@{/products/search(keyword=${keyword},page=${currentPage+-1},size=${size})}">« Prev</a>
+               th:href="@{/products(keyword=${keyword},category=${selectedCategory},minPrice=${minPrice},maxPrice=${maxPrice},sortBy=${sortBy},sortDir=${sortDir},page=${currentPage - 1},size=${size})}">
+                « Prev
+            </a>
+
             <!-- Page numbers -->
             <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
                 <a th:if="${i != currentPage}"
-                   th:href="@{/products/search(keyword=${keyword},page=${i},size=${size})}"
+                   th:href="@{/products(keyword=${keyword},category=${selectedCategory},minPrice=${minPrice},maxPrice=${maxPrice},sortBy=${sortBy},sortDir=${sortDir},page=${i},size=${size})}"
                    th:text="${i + 1}">1</a>
 
                 <span th:if="${i == currentPage}" class="active" th:text="${i + 1}">1</span>
@@ -315,9 +385,12 @@
 
             <!-- Next -->
             <a th:if="${currentPage < totalPages - 1}"
-               th:href="@{/products/search(keyword=${keyword},page=${currentPage+1},size=${size})}">Next »</a>
+               th:href="@{/products(keyword=${keyword},category=${selectedCategory},minPrice=${minPrice},maxPrice=${maxPrice},sortBy=${sortBy},sortDir=${sortDir},page=${currentPage + 1},size=${size})}">
+                Next »
+            </a>
             <span th:if="${currentPage >= totalPages - 1}" class="disabled">Next »</span>
         </div>
+
     </div>
 
     <!-- Empty State -->

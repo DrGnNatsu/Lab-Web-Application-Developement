@@ -14,13 +14,13 @@ public interface ProductService {
 
     Optional<Product> getProductById(Long id);
 
-    void saveProduct(Product product);
+    Product saveProduct(Product product);
 
     void deleteProduct(Long id);
 
     Page<Product> searchProducts(String keyword, Pageable pageable);
 
-    List<Product> getProductsByCategory(String category);
+    Page<Product> getProductsByCategory(String category, Pageable pageable);
 
     Page<Product> advancedSearch(String keyword, String category, BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
 

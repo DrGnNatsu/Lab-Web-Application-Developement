@@ -34,9 +34,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public Product saveProduct(Product product) {
         // Validation logic can go here
         productRepository.save(product);
+        return product;
     }
 
     @Override
@@ -50,8 +51,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category);
+
+    public Page<Product> getProductsByCategory(String category, Pageable pageable) {
+        if (category == null || category.isBlank()) {
+            return productRepository.findAll(pageable);
+        }
+        return productRepository.findByCategory(category, pageable);
     }
 
     @Override

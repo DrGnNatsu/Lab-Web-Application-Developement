@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -31,17 +31,41 @@ public class ProductController {
     @GetMapping
     public String listProducts(Model model,
                                @RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productPage = productService.getAllProducts(pageable);
-        model.addAttribute("products", productPage.getContent());
+                               @RequestParam(defaultValue = "10") int size,
+                               @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
+                               @RequestParam(name = "sortDir", defaultValue = "asc") String sortDir,
+                               @RequestParam(name = "category", required = false) String category,
+                               @RequestParam(name = "keyword", required = false) String keyword,
+                               @RequestParam(name = "minPrice", required = false) Double minPrice,
+                               @RequestParam(name = "maxPrice", required = false) Double maxPrice) {
+
+
+        Sort sort = sortDir.equals("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Product> products = productService.advancedSearch(
+                keyword,
+                category,
+                minPrice != null ? BigDecimal.valueOf(minPrice) : null,
+                maxPrice != null ? BigDecimal.valueOf(maxPrice) : null,
+                pageable
+        );
+
+        model.addAttribute("products", products.getContent());
         model.addAttribute("categories", productService.findAllCategories());
 
-        model.addAttribute("productPage", productPage);
+        model.addAttribute("productPage", products);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("totalPages", products.getTotalPages());
         model.addAttribute("size", size);
         model.addAttribute("searchType", "search");
+
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("sortDir", sortDir);
+
+        model.addAttribute("selectedCategory", category != null ? category : "");
+        model.addAttribute("keyword", keyword != null ? keyword : "");
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
         return "product-list";  // Returns product-list.html
     }
 
