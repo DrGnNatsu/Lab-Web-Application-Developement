@@ -3,10 +3,15 @@ package com.example.productmanagement.controller;
 import com.example.productmanagement.entity.Product;
 import com.example.productmanagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.validation.Valid;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,10 +29,19 @@ public class ProductController {
 
     // List all products
     @GetMapping
-    public String listProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
+    public String listProducts(Model model,
+                               @RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productService.getAllProducts(pageable);
+        model.addAttribute("products", productPage.getContent());
         model.addAttribute("categories", productService.findAllCategories());
+
+        model.addAttribute("productPage", productPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("size", size);
+        model.addAttribute("searchType", "search");
         return "product-list";  // Returns product-list.html
     }
 
@@ -55,14 +69,22 @@ public class ProductController {
 
     // Save product (create or update)
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute("product") Product product, RedirectAttributes redirectAttributes) {
+    public String saveProduct(
+            @Valid @ModelAttribute("product") Product product,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors()) {
+            return "product-form";
+        }
+
         try {
             productService.saveProduct(product);
-            redirectAttributes.addFlashAttribute("message",
-                    product.getId() == null ? "Product added successfully!" : "Product updated successfully!");
+            redirectAttributes.addFlashAttribute("message", "Product saved successfully!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error saving product: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("error", "Error: " + e.getMessage());
         }
+
         return "redirect:/products";
     }
 
@@ -80,11 +102,20 @@ public class ProductController {
 
     // Search products
     @GetMapping("/search")
-    public String searchProducts(@RequestParam("keyword") String keyword, Model model) {
-        List<Product> products = productService.searchProducts(keyword);
-        model.addAttribute("products", products);
+    public String searchProducts(@RequestParam("keyword") String keyword,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size,
+                                 Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productService.searchProducts(keyword, pageable);
         model.addAttribute("keyword", keyword);
         model.addAttribute("categories", productService.findAllCategories());
+        model.addAttribute("products", productPage.getContent());
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("size", size);
+        model.addAttribute("searchType", "search");
         return "product-list";
     }
 
@@ -94,15 +125,23 @@ public class ProductController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
-            Model model) {
+            Model model,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
 
-        List<Product> products = productService.advancedSearch(keyword, category, minPrice, maxPrice);
-        model.addAttribute("products", products);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productService.advancedSearch(keyword, category, minPrice, maxPrice, pageable);
+        model.addAttribute("products", productPage.getContent());
         model.addAttribute("categories", productService.findAllCategories());
         model.addAttribute("keyword", keyword);
         model.addAttribute("category", category);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
+
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("size", size);
+        model.addAttribute("searchType", "search");
         return "product-list";
     }
 
