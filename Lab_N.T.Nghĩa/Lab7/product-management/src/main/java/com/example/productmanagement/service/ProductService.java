@@ -25,4 +25,16 @@ public interface ProductService {
     Page<Product> advancedSearch(String keyword, String category, BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
 
     List<String> findAllCategories();
+
+    long getTotalProductCount();
+
+    long countByCategory(String category);
+
+    BigDecimal calculateTotalInventoryValue();
+
+    BigDecimal calculateAveragePrice();
+
+    List<Product> findLowStockProducts(int threshold);
+
+    List<Product> getAllProduct();
 }

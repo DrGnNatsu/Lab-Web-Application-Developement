@@ -73,4 +73,34 @@ public class ProductServiceImpl implements ProductService {
     public List<String> findAllCategories() {
         return productRepository.findAllCategories();
     }
+
+    @Override
+    public long getTotalProductCount() {
+        return productRepository.count();
+    }
+
+    @Override
+    public long countByCategory(String category) {
+        return productRepository.countByCategory(category);
+    }
+
+    @Override
+    public BigDecimal calculateTotalInventoryValue() {
+        return productRepository.calculateTotalValue();
+    }
+
+    @Override
+    public BigDecimal calculateAveragePrice() {
+        return productRepository.calculateAveragePrice();
+    }
+
+    @Override
+    public List<Product> findLowStockProducts(int threshold) {
+        return productRepository.findLowStockProducts(threshold);
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
+    }
 }
