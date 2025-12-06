@@ -1,0 +1,18 @@
+services:
+  db:
+    image: mysql
+    container_name: customer-api-db
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: customer-api
+      MYSQL_USER: app
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
