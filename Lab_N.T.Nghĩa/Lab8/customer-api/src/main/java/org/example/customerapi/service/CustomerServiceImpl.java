@@ -3,12 +3,16 @@ package org.example.customerapi.service;
 import org.example.customerapi.dto.CustomerRequestDTO;
 import org.example.customerapi.dto.CustomerResponseDTO;
 import org.example.customerapi.entity.Customer;
+import org.example.customerapi.enum_class.CustomerStatus;
 import org.example.customerapi.exception.DuplicateResourceException;
 import org.example.customerapi.exception.ResourceNotFoundException;
 import org.example.customerapi.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +29,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerResponseDTO> getAllCustomers() {
-        return customerRepository.findAll()
-                .stream()
-                .map(this::convertToResponseDTO)
-                .collect(Collectors.toList());
+    public Page<CustomerResponseDTO> getAllCustomers(int page, int size, Sort sort, String sortBy) {
+        Page<Customer> customerPage = customerRepository.findAll(PageRequest.of(page, size), sort, sortBy);
+
+        return customerPage.map(this::convertToResponseDTO);
     }
 
     @Override
@@ -100,15 +103,25 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerResponseDTO> getCustomersByStatus(String status) {
+    public List<CustomerResponseDTO> getCustomersByStatus(CustomerStatus status) {
         return customerRepository.findByStatus(status)
                 .stream()
                 .map(this::convertToResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    // Helper Methods for DTO Conversion
+    @Override
+    public List<CustomerResponseDTO> advancedSearch(String fullName, String email, CustomerStatus status) {
+        return customerRepository.advancedSearch(fullName, email, status)
+                .stream()
+                .filter(c -> (fullName == null || c.getFullName().toLowerCase().contains(fullName.toLowerCase())) &&
+                             (email == null || c.getEmail().toLowerCase().contains(email.toLowerCase())) &&
+                             (status == null || c.getStatus() == status))
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
 
+    // Helper Methods for DTO Conversion
     private CustomerResponseDTO convertToResponseDTO(Customer customer) {
         CustomerResponseDTO dto = new CustomerResponseDTO();
         dto.setId(customer.getId());
