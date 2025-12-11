@@ -1,7 +1,8 @@
-package org.example.customerapi.controller;
+package org.example.customerapi.controller.v1;
 
 import org.example.customerapi.dto.CustomerRequestDTO;
 import org.example.customerapi.dto.CustomerResponseDTO;
+import org.example.customerapi.dto.CustomerUpdateDTO;
 import org.example.customerapi.enum_class.CustomerStatus;
 import org.example.customerapi.service.CustomerService;
 import jakarta.validation.Valid;
@@ -16,15 +17,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/v1/customers")
 @CrossOrigin(origins = "*")  // Allow CORS for frontend
-public class CustomerRestController {
+public class CustomerRestControllerV1 {
 
     private final CustomerService customerService;
 
     @Autowired
-    public CustomerRestController(CustomerService customerService) {
+    public CustomerRestControllerV1(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -39,7 +42,8 @@ public class CustomerRestController {
         Sort sort = sortDir.equalsIgnoreCase("asc")
                 ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
-        Page<CustomerResponseDTO> customerPage = customerService.getAllCustomers(page, size, sort, sortBy);
+
+        Page<CustomerResponseDTO> customerPage = customerService.getAllCustomers(page, size, sort);
 
         Map<String, Object> response = new HashMap<>();
         response.put("customers", customerPage.getContent());
@@ -104,4 +108,14 @@ public class CustomerRestController {
         List<CustomerResponseDTO> customers = customerService.advancedSearch(name, email, status);
         return ResponseEntity.ok(customers);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<CustomerResponseDTO> partialUpdateCustomer(
+            @PathVariable Long id,
+            @RequestBody CustomerUpdateDTO updateDTO) {
+
+        CustomerResponseDTO updated = customerService.partialUpdateCustomer(id, updateDTO);
+        return ResponseEntity.ok(updated);
+    }
+
 }

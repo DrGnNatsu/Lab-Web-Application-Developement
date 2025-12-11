@@ -2,6 +2,7 @@ package org.example.customerapi.service;
 
 import org.example.customerapi.dto.CustomerRequestDTO;
 import org.example.customerapi.dto.CustomerResponseDTO;
+import org.example.customerapi.dto.CustomerUpdateDTO;
 import org.example.customerapi.entity.Customer;
 import org.example.customerapi.enum_class.CustomerStatus;
 import org.example.customerapi.exception.DuplicateResourceException;
@@ -29,8 +30,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Page<CustomerResponseDTO> getAllCustomers(int page, int size, Sort sort, String sortBy) {
-        Page<Customer> customerPage = customerRepository.findAll(PageRequest.of(page, size), sort, sortBy);
+    public Page<CustomerResponseDTO> getAllCustomers(int page, int size, Sort sort) {
+        Page<Customer> customerPage = customerRepository.findAll(PageRequest.of(page, size, sort));
 
         return customerPage.map(this::convertToResponseDTO);
     }
@@ -120,6 +121,24 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(this::convertToResponseDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public CustomerResponseDTO partialUpdateCustomer(Long id, CustomerUpdateDTO updateDTO) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+
+        // Only update non-null fields
+        if (updateDTO.getFullName() != null) {
+            customer.setFullName(updateDTO.getFullName());
+        }
+        if (updateDTO.getEmail() != null) {
+            customer.setEmail(updateDTO.getEmail());
+        }
+        // ... other fields
+
+        return convertToResponseDTO(customerRepository.save(customer));
+    }
+
 
     // Helper Methods for DTO Conversion
     private CustomerResponseDTO convertToResponseDTO(Customer customer) {

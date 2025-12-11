@@ -1,0 +1,220 @@
+{
+	"id": "a541f2f4-c6e4-4953-9608-9d53e4d98c7b",
+	"name": "Lab8",
+	"timestamp": "2025-12-11T16:11:36.565Z",
+	"collection_id": "39961786-64638f13-d20a-4085-beaf-1e1e9c86eb2c",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-12-11T16:11:36.134Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "b403121a-5483-4845-a728-a42f7c851802",
+			"name": "Get All Customers",
+			"url": "localhost:8080/api/v1/customers?page=0&size=5&sortDir=desc&sortBy=id",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ebc46fdb-f76d-453a-ba24-beec84e089d3",
+			"name": "Get Customer By ID",
+			"url": "localhost:8080/api/v1/customers/1",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				8
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "13a28095-e72b-449b-bb1b-df646cf2c1b8",
+			"name": "Create The User",
+			"url": "localhost:8080/api/v1/customers",
+			"time": 15,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "15d52336-9c0d-453c-971a-756b9ba663d9",
+			"name": "Update Customer",
+			"url": "localhost:8080/api/v1/customers/6",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "08db8f4f-92a5-4138-9fc4-f7a5e71defc6",
+			"name": "Partial Update",
+			"url": "localhost:8080/api/v1/customers/6",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "108b18bd-ecc1-4fb4-b529-dfc4cb075a43",
+			"name": "Delete Customer By ID",
+			"url": "localhost:8080/api/v1/customers/1",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0e1e9c63-4997-4f0b-947b-c9ba46dc905d",
+			"name": "Search Customer",
+			"url": "localhost:8080/api/v1/customers/search?keyword=john",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				11
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c0bbf5f4-5737-49d5-ab2d-e557b4c770d5",
+			"name": "Filter By Status",
+			"url": "localhost:8080/api/v1/customers/status/ACTIVE",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a3606813-403c-46b0-8fc0-c9bd691933fb",
+			"name": "API Versioning",
+			"url": "localhost:8080/api/v2/customers/2",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				19
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 117,
+	"collection": {
+		"requests": [
+			{
+				"id": "b403121a-5483-4845-a728-a42f7c851802",
+				"method": "GET"
+			},
+			{
+				"id": "ebc46fdb-f76d-453a-ba24-beec84e089d3",
+				"method": "GET"
+			},
+			{
+				"id": "13a28095-e72b-449b-bb1b-df646cf2c1b8",
+				"method": "POST"
+			},
+			{
+				"id": "15d52336-9c0d-453c-971a-756b9ba663d9",
+				"method": "PUT"
+			},
+			{
+				"id": "08db8f4f-92a5-4138-9fc4-f7a5e71defc6",
+				"method": "PATCH"
+			},
+			{
+				"id": "108b18bd-ecc1-4fb4-b529-dfc4cb075a43",
+				"method": "DELETE"
+			},
+			{
+				"id": "0e1e9c63-4997-4f0b-947b-c9ba46dc905d",
+				"method": "GET"
+			},
+			{
+				"id": "c0bbf5f4-5737-49d5-ab2d-e557b4c770d5",
+				"method": "GET"
+			},
+			{
+				"id": "a3606813-403c-46b0-8fc0-c9bd691933fb",
+				"method": "GET"
+			}
+		]
+	}
+}

@@ -4,6 +4,7 @@ import org.example.customerapi.entity.Customer;
 import org.example.customerapi.enum_class.CustomerStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -40,15 +41,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
                                   @Param("email") String email,
                                   @Param("status") CustomerStatus status);
 
-    @Query("SELECT c FROM Customer c ORDER BY " +
-            "CASE WHEN :sort = 'asc' THEN " +
-            "   CASE WHEN :sortBy = 'fullName' THEN c.fullName END ASC, " +
-            "   CASE WHEN :sortBy = 'email' THEN c.email END ASC, " +
-            "   CASE WHEN :sortBy = 'customerCode' THEN c.customerCode END ASC " +
-            "WHEN :sort = 'desc' THEN " +
-            "   CASE WHEN :sortBy = 'fullName' THEN c.fullName END DESC, " +
-            "   CASE WHEN :sortBy = 'email' THEN c.email END DESC, " +
-            "   CASE WHEN :sortBy = 'customerCode' THEN c.customerCode END DESC " +
-            "END")
-    Page<Customer> findAll(PageRequest of, @Param("sort") Sort sort, @Param("sortBy") String sortBy);
+
+    Page<Customer> findAll(Pageable pageable);
 }

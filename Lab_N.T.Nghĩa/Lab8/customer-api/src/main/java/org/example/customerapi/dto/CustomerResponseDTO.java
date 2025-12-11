@@ -2,12 +2,13 @@ package org.example.customerapi.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CustomerResponseDTO {
+public class CustomerResponseDTO extends RepresentationModel<CustomerResponseDTO> {
 
     private Long id;
     private String customerCode;
