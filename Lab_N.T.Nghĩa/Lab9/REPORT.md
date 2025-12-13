@@ -103,7 +103,6 @@ Implement the endpoints the same as the task and use the associated `service`.
 
 ![Test Authorization (USER trying to DELETE)](image/535.png)
 
- Test Authorization (ADMIN trying to DELETE)
+- Test Authorization (ADMIN trying to DELETE)
 
 ![Test Authorization (ADMIN trying to DELETE)](image/536.png)
-
