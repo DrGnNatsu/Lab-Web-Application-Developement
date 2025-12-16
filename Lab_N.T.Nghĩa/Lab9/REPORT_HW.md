@@ -12,6 +12,8 @@
 
 [AuthController.java](customer-api/src/main/java/org/example/customerapi/controller/v1/AuthController.java)
 
+![Change Password](image/611.png)
+
 ### Task 6.2: Forgot Password (6 points)
 
 - Create password reset token system:
@@ -66,6 +68,9 @@
             }
         ```
 
+![Forgot Password](image/621.png)
+![Reset Password](image/622.png)
+
 ## EXERCISE 7: USER PROFILE MANAGEMENT (10 points)
 
 ### Task 7.1: View Profile (3 points)
@@ -73,6 +78,23 @@
 1. Get the authentication data to verify the user
 2. Based on the data, we extract the username to file thier profile
 3. Reponse back to the user
+
+```java
+    @GetMapping("/profile")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<UserResponseDTO> getProfile() {
+        // Retrieve and return the authenticated user's profile
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+        UserResponseDTO userResponseDTO = userService.getCurrentUser(username);
+        return ResponseEntity.ok(userResponseDTO);
+
+    }
+```
+
+![View User Profile](image/711.png)
+
 
 ### Task 7.2: Update Profile (4 points)
 
@@ -93,6 +115,9 @@
         return ResponseEntity.ok(updatedUser);
     }
 ```
+
+![Update User profile](image/721.png)
+
 
 ### Task 7.3: Delete Account (3 points)
 
@@ -116,6 +141,9 @@
     }
 ```
 
+![Delete Account](image/731.png)
+
+
 ## EXERCISE 8: ADMIN ENDPOINTS (10 points)
 
 ### Task 8.1: List All Users (3 points)
@@ -133,6 +161,8 @@
         return ResponseEntity.ok(users);
     }
 ```
+
+![List All Users](image/811.png)
 
 ### Task 8.2: Update User Role (4 points)
 
@@ -154,6 +184,9 @@
         }
     ```
 
+![Update user role](image/821.png)
+
+
 ### Task 8.3: Deactivate/Activate User (3 points)
 
 1. Using the annotation `@PreAuthorize` to verify the role of users
@@ -168,6 +201,9 @@
         return ResponseEntity.ok(updated);
     }
 ```
+
+![Change user status](image/831.png)
+
 
 ## EXERCISE 9: REFRESH TOKEN (8 points)
 
@@ -266,6 +302,8 @@
     }
 ```
 
+![Refresh Token](image/931.png)
+
 ## BONUS 2: Login Activity Log (6 points)
 
 1. Create the login history entity [LoginHistory.java](customer-api/src/main/java/org/example/customerapi/entity/LoginHistory.java)
@@ -283,3 +321,5 @@
     ```
 
 3. Create the endpoint and using `Userservice.login()` to execute the request.
+
+![Login History](image/B21.png)
