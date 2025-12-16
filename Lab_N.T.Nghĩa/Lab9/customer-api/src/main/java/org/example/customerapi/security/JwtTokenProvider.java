@@ -36,6 +36,21 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    // Generate JWT token directly from username (without Authentication object)
+    public String generateTokenFromUsername(String username) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + jwtExpiration);
+
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(key)
+                .compact();
+    }
+
     // Get username from token
     public String getUsernameFromToken(String token) {
         SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));

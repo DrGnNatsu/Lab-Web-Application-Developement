@@ -43,6 +43,13 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    // Password reset token fields
+    @Column(name = "reset_token", length = 255)
+    private String resetToken;
+
+    @Column(name = "reset_token_expiry")
+    private LocalDateTime resetTokenExpiry;
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

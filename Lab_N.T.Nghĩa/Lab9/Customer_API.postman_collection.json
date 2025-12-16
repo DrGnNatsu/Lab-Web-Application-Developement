@@ -1,0 +1,849 @@
+{
+	"info": {
+		"_postman_id": "64638f13-d20a-4085-beaf-1e1e9c86eb2c",
+		"name": "Lab9",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39961786"
+	},
+	"item": [
+		{
+			"name": "Get All Customers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerCode\": \"C007\",\n    \"fullName\": \"Test User\",\n    \"email\": \"john.doe@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers?page=0&size=5&sortDir=desc&sortBy=id",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"John Partially Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/5",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create The Customers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerCode\": \"C036\",\n    \"fullName\": \"Niggay\",\n    \"email\": \"niggay@example.com\",\n    \"phone\": \"0123456789\",\n    \"address\": \"Thanh Hoa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerCode\": \"C036\",\n    \"fullName\": \"SpiderMan\",\n    \"email\": \"SpiderMan@example.com\",\n    \"phone\": \"9876543210\",\n    \"address\": \"1000 Broadway, Seattle, WA 98101\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/6",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partial Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Binh Partial Update\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/6",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"John Partially Updated\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/3",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/search?keyword=john",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "john"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter By Status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerCode\": \"C007\",\n    \"fullName\": \"Test User\",\n    \"email\": \"john.doe@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/customers/status/INACTIVE",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customers",
+						"status",
+						"INACTIVE"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Versioning",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerCode\": \"C007\",\n    \"fullName\": \"Test User\",\n    \"email\": \"john.doe@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v2/customers/3",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v2",
+						"customers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Ensure your response body contains a 'token' or 'access_token' field",
+							"var jsonData = pm.response.json(); ",
+							"if (jsonData.refreshToken) {",
+							"    // Set a collection variable named \"accessToken\" with the token value",
+							"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken); ",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else if (jsonData.refreshToken) {",
+							"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else {",
+							"    console.warn(\"⚠️ No token found in response.\");",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testadmin\",\n    \"password\": \"password123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Role",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/admin/users/3/role",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"users",
+						"3",
+						"role"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"password123\"\n}\n"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/logout",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"currentPassword\": \"password123\",\n    \"newPassword\": \"newpassword123\",\n    \"confirmPassword\": \"newpassword123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/change-password",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Ensure your response body contains a 'token' or 'access_token' field",
+							"var jsonData = pm.response.json(); ",
+							"if (jsonData.resetToken) {",
+							"    // Set a collection variable named \"accessToken\" with the token value",
+							"    pm.collectionVariables.set(\"resetToken\", jsonData.resetToken); ",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else if (jsonData.resetToken) {",
+							"    pm.collectionVariables.set(\"resetToken\", jsonData.resetToken);",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else {",
+							"    console.warn(\"⚠️ No token found in response.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test@example.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/forgot-password",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"resetToken\": \"{{resetToken}}\",\n    \"newPassword\": \"password123\",\n    \"confirmPassword\": \"password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/reset-password",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/v1/users/profile",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Update Name\",\n    \"email\": \"updatedEmail@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/users/profile",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test1\",\n    \"email\": \"test1@example.com\",\n    \"password\": \"password123\",\n    \"fullName\": \"Test Admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/register",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/users/account?password=password123",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"account"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "password123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Update Name\",\n    \"email\": \"updatedEmail@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/admin/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/admin/users/3/status",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"users",
+						"3",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Ensure your response body contains a 'token' or 'access_token' field",
+							"var jsonData = pm.response.json(); ",
+							"if (jsonData.refreshToken) {",
+							"    // Set a collection variable named \"accessToken\" with the token value",
+							"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken); ",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else if (jsonData.refreshToken) {",
+							"    pm.collectionVariables.set(\"refreshToken\", jsonData.refreshToken);",
+							"    console.log(\"✅ Token saved successfully!\");",
+							"} else {",
+							"    console.warn(\"⚠️ No token found in response.\");",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"{{refreshToken}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/auth/refresh",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login History",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Update Name\",\n    \"email\": \"updatedEmail@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/users/login-history",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login-history"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"// Ensure your response body contains a 'token' or 'access_token' field",
+					"var jsonData = pm.response.json(); ",
+					"if (jsonData.token) {",
+					"    // Set a collection variable named \"accessToken\" with the token value",
+					"    pm.collectionVariables.set(\"token\", jsonData.token); ",
+					"    console.log(\"✅ Token saved successfully!\");",
+					"} else if (jsonData.token) {",
+					"    pm.collectionVariables.set(\"token\", jsonData.access_token);",
+					"    console.log(\"✅ Token saved successfully!\");",
+					"} else {",
+					"    console.warn(\"⚠️ No token found in response.\");",
+					"}",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "resetToken",
+			"value": ""
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
+		}
+	]
+}

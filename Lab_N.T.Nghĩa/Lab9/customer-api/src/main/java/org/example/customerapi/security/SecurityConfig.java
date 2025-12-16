@@ -61,11 +61,15 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/customers/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/customers/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/customers/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/customers/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/customers/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/customers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/customers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/customers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v2/customers/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v2/customers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v2/customers/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v2/customers/**").hasRole("ADMIN")
                         // All other requests need authentication
                         .anyRequest().authenticated()
                 );
